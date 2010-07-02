@@ -10,7 +10,8 @@
     xmlns:wfs="http://www.opengis.net/wfs"
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:xlink="http://www.w3.org/1999/xlink"
-    exclude-result-prefixes="er geodesy gml gsml ngcp sa wfs xsl xlink">
+    xmlns:wml="http://bom"
+    exclude-result-prefixes="er geodesy gml gsml ngcp sa wfs xsl xlink wml">
 
    <xsl:output method="xml" version="1.0" encoding="UTF-8" indent="no"
       cdata-section-elements="description Snippet text" 
@@ -72,7 +73,10 @@
                <xsl:text>GeoSciML data converted to KML</xsl:text>
             </description>
 
-			
+			<xsl:apply-templates select="gml:featureMember/wml:monthly_climate_summary_loc"/>
+            
+            <xsl:apply-templates select="gml:featureMembers/wml:monthly_climate_summary_loc"/>
+            
             <!-- <xsl:apply-templates select="gml:featureMember/er:Mine"/>
             <xsl:apply-templates select="gml:featureMember/er:MiningActivity"/>
             <xsl:apply-templates select="gml:featureMember/er:MiningFeatureOccurrence"/>
@@ -81,6 +85,7 @@
             <xsl:apply-templates select="gml:featureMember/gsml:GeologicUnit"/>
             <xsl:apply-templates select="gml:featureMember/gsml:MappedFeature"/>
             <xsl:apply-templates select="gml:featureMember/gsml:ShearDisplacementStructure"/>
+            
 
             <xsl:apply-templates select="gml:featureMembers/er:Mine"/>
             <xsl:apply-templates select="gml:featureMembers/er:MiningActivity"/>
@@ -259,6 +264,32 @@
       </xsl:call-template>
    </xsl:template>
    
+   <!-- TEMPLATE FOR TRANSLATING wml:monthly_climate_summary_loc -->
+   <!-- ================================================================= -->
+   <xsl:template match="gml:featureMember/wml:monthly_climate_summary_loc | gml:featureMembers/wml:monthly_climate_summary_loc" priority="100">
+   
+      <Placemark>
+         <name><xsl:value-of select="./wml:station"/></name>
+         <description>
+            <![CDATA[<table border="1" cellspacing="1" width="100%" bgcolor="#EAF0F8">
+            ]]><xsl:value-of select="./ngcp:GPSSITEID"/>
+            <![CDATA[</td></tr><tr><td>Site ID</td><td>]]><xsl:value-of select="./wml:station"/>
+            <![CDATA[</td></tr><tr><td>Date</td><td>]]><xsl:value-of select="./wml:date"/>   
+            <![CDATA[</td></tr><tr><td>Max Tempreture</td><td>]]><xsl:value-of select="./wml:max_tempreture"/> 
+            <![CDATA[</td></tr><tr><td>Min Tempreture</td><td>]]><xsl:value-of select="./wml:min_tempreture"/> 
+            <![CDATA[</td></tr><tr><td>Precipitation</td><td>]]><xsl:value-of select="./wml:prce"/>                                                      
+            <![CDATA[</td></tr></table>]]>
+         </description>
+         
+         <Point>
+            <coordinates>
+                <xsl:value-of select="./wml:lon"/>,<xsl:value-of select="./wml:lat"/>
+            </coordinates>
+         </Point>
+         
+      </Placemark>
+
+   </xsl:template>
    
    <!-- TEMPLATE FOR TRANSLATING GPS - geodesy WFS 1.0.0 GML2 -->
    <!-- =================================================================

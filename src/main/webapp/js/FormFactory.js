@@ -18,14 +18,12 @@
 FormFactory = function() {};
 
 FormFactory.prototype.getFilterForm = function(record, map) {
-
+	
     if (record.get('serviceType') == 'wms') {
         return new WMSLayerFilterForm(record, map);
     } else {
-        switch (record.get('typeName')) {
-            case 'er:Mine': return new MineFilterForm(record.get('id'), record.get('serviceURLs')[0]); break;
-            case 'er:MiningActivity': return new MiningActivityFilterForm(record.get('id'), record.get('serviceURLs')[0]); break;
-            case 'er:MineralOccurrence': return new MineralOccurrenceFilterForm(record.get('id')); break;
+        switch (record.get('typeName')) {            
+            case 'wml:monthly_climate_summary_loc': return new BomMonthlySummaryFilterForm(record.get('id'), record.get('serviceURLs')[0]); break;
             default: return null; break;
         }
     }

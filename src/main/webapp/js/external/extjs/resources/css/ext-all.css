@@ -502,7 +502,7 @@ ul.x-tab-strip {
 }
 
 ul.x-tab-strip-top{
-	padding-top: 1px;
+	padding-top: 5px;
 	background: repeat-x bottom;
 	border-bottom: 1px solid;
 }
