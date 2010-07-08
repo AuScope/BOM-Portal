@@ -73,10 +73,6 @@
                <xsl:text>GeoSciML data converted to KML</xsl:text>
             </description>
 
-			<xsl:apply-templates select="gml:featureMember/wml:monthly_climate_summary_loc"/>
-            
-            <xsl:apply-templates select="gml:featureMembers/wml:monthly_climate_summary_loc"/>
-            
             <!-- <xsl:apply-templates select="gml:featureMember/er:Mine"/>
             <xsl:apply-templates select="gml:featureMember/er:MiningActivity"/>
             <xsl:apply-templates select="gml:featureMember/er:MiningFeatureOccurrence"/>
@@ -264,9 +260,10 @@
       </xsl:call-template>
    </xsl:template>
    
-   <!-- TEMPLATE FOR TRANSLATING wml:monthly_climate_summary_loc -->
+   <!-- TEMPLATE FOR TRANSLATING BOM Climate Summaries -->
    <!-- ================================================================= -->
-   <xsl:template match="gml:featureMember/wml:monthly_climate_summary_loc | gml:featureMembers/wml:monthly_climate_summary_loc" priority="100">
+   <xsl:template match="gml:featureMember/wml:monthly_climate_summary | gml:featureMembers/wml:monthly_climate_summary |
+        gml:featureMember/wml:daily_climate_summary | gml:featureMembers/wml:daily_climate_summary" priority="100">
    
       <Placemark>
          <name><xsl:value-of select="./wml:station"/></name>
@@ -274,18 +271,12 @@
             <![CDATA[<table border="1" cellspacing="1" width="100%" bgcolor="#EAF0F8">
             ]]><xsl:value-of select="./ngcp:GPSSITEID"/>
             <![CDATA[</td></tr><tr><td>Site ID</td><td>]]><xsl:value-of select="./wml:station"/>
-            <![CDATA[</td></tr><tr><td>Date</td><td>]]><xsl:value-of select="./wml:date"/>   
-            <![CDATA[</td></tr><tr><td>Max Tempreture</td><td>]]><xsl:value-of select="./wml:max_tempreture"/> 
-            <![CDATA[</td></tr><tr><td>Min Tempreture</td><td>]]><xsl:value-of select="./wml:min_tempreture"/> 
-            <![CDATA[</td></tr><tr><td>Precipitation</td><td>]]><xsl:value-of select="./wml:prce"/>                                                      
+            <![CDATA[</td></tr><tr><td>Site Name</td><td>]]>   
+            <![CDATA[</td></tr><tr><td>Commenced</td><td>]]> 
             <![CDATA[</td></tr></table>]]>
          </description>
          
-         <Point>
-            <coordinates>
-                <xsl:value-of select="./wml:lon"/>,<xsl:value-of select="./wml:lat"/>
-            </coordinates>
-         </Point>
+         <xsl:apply-templates select="./wml:location/gml:Point"/>
          
       </Placemark>
 

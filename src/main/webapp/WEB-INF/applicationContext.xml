@@ -21,8 +21,8 @@
     <bean id="knownTypes" class="java.util.ArrayList">
         <constructor-arg>
             <list>
-                <ref bean="knownTypeBom" />
-                <!--  ref bean="knownTypeBomStation" / -->
+                <ref bean="knownTypeBomMonthly" />
+                <ref bean="knownTypeBomDaily" />
             </list>
         </constructor-arg>
     </bean>
@@ -43,19 +43,19 @@
         </constructor-arg>
     </bean>
 
-   <bean id="knownTypeBom" class="org.auscope.portal.server.web.KnownFeatureTypeDefinition">
-       <constructor-arg index="0" value="wml:monthly_climate_summary_loc"/>
+   <bean id="knownTypeBomMonthly" class="org.auscope.portal.server.web.KnownFeatureTypeDefinition">
+       <constructor-arg index="0" value="wml:monthly_climate_summary"/>
        <constructor-arg index="1" value="Monthly Climate Summary"/>
        <constructor-arg index="2" value=""/>
-       <constructor-arg index="3" value="doBomMonthlySummaryFilter.do"/>
+       <constructor-arg index="3" value="doBomClimateSummaryFilter.do"/>
        <constructor-arg index="4" value="http://maps.google.com/mapfiles/kml/paddle/ylw-blank.png"/>
    </bean>
    
-   <bean id="knownTypeBomStation" class="org.auscope.portal.server.web.KnownFeatureTypeDefinition">
-       <constructor-arg index="0" value="wml:stations"/>
-       <constructor-arg index="1" value="Stations"/>
+   <bean id="knownTypeBomDaily" class="org.auscope.portal.server.web.KnownFeatureTypeDefinition">
+       <constructor-arg index="0" value="wml:daily_climate_summary"/>
+       <constructor-arg index="1" value="Daily Climate Summary"/>
        <constructor-arg index="2" value=""/>
-       <constructor-arg index="3" value="doBomStationFilter.do"/>
-       <constructor-arg index="4" value="http://maps.google.com/mapfiles/kml/paddle/blu-blank.png"/>
+       <constructor-arg index="3" value="doBomClimateSummaryFilter.do"/>
+       <constructor-arg index="4" value="http://maps.google.com/mapfiles/kml/paddle/red-blank.png"/>
    </bean>
 </beans>

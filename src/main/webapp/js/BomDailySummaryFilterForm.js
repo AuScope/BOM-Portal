@@ -1,10 +1,10 @@
 /**
- * Builds a form panel for BOM Monthly Summary filters
+ * Builds a form panel for BOM Daily Summary filters
  * 
  * @param {number} id of this formpanel instance
  * @param {string} the service url for submit
  */
-BomMonthlySummaryFilterForm = function(id, serviceUrl) {
+BomDailySummaryFilterForm = function(id, serviceUrl) {
     
 	var now = new Date();
 	
@@ -22,13 +22,13 @@ BomMonthlySummaryFilterForm = function(id, serviceUrl) {
         autoHeight: true,
         items       : [{
             xtype      :'fieldset',
-            title      : 'Monthly Summary Filter Properties',
+            title      : 'Daily Summary Filter Properties',
             autoHeight : true,
             items      : [
-			{
+            {
 			    xtype      : 'hidden',
 			    name       : 'featureType',
-			    value: 'wml:monthly_climate_summary'
+			    value: 'wml:daily_climate_summary'
 			},{
                 xtype      : 'textfield',
                 fieldLabel : 'Station No',
@@ -71,4 +71,4 @@ BomMonthlySummaryFilterForm = function(id, serviceUrl) {
     });
 };
 
-BomMonthlySummaryFilterForm.prototype = new Ext.FormPanel();
+BomDailySummaryFilterForm.prototype = new Ext.FormPanel();

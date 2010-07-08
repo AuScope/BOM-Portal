@@ -61,7 +61,7 @@ var gMapClickController = function(map, overlay, latlng, activeLayersStore) {
         else if (overlay.typeName == "ngcp:GnssStation") {
             new GeodesyMarker(overlay.wfsUrl, "geodesy:station_observations", overlay.title, overlay, overlay.description).getMarkerClickedFn()();
         }
-        else if (overlay.typeName == "wml:monthly_climate_summary_loc") {
+        else if (overlay.typeName == "wml:monthly_climate_summary" || overlay.typeName == "wml:daily_climate_summary") {
             new BomMarker(overlay.title, overlay, overlay.description).markerClicked()();
         }
         else if (overlay.description != null) {

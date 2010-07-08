@@ -39,7 +39,6 @@ BomMarker.prototype.msSummaryHtml = null;
 BomMarker.prototype.moMarker = null;
 
 BomMarker.prototype.markerClicked = BomMarker_markerClicked;
-BomMarker.prototype.getMarkerClickedFn = BomMarker_getMarkerClickedFn;
 
 /**
 * The function called when the marker for this station is clicked.<br> 

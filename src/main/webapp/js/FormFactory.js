@@ -23,7 +23,8 @@ FormFactory.prototype.getFilterForm = function(record, map) {
         return new WMSLayerFilterForm(record, map);
     } else {
         switch (record.get('typeName')) {            
-            case 'wml:monthly_climate_summary_loc': return new BomMonthlySummaryFilterForm(record.get('id'), record.get('serviceURLs')[0]); break;
+            case 'wml:monthly_climate_summary': return new BomMonthlySummaryFilterForm(record.get('id'), record.get('serviceURLs')[0]); break;
+            case 'wml:daily_climate_summary': return new BomDailySummaryFilterForm(record.get('id'), record.get('serviceURLs')[0]); break;
             default: return null; break;
         }
     }

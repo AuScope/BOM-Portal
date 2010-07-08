@@ -48,7 +48,8 @@ public class WFSGetFeatureMethodMakerPOST implements IWFSGetFeatureMethodMaker {
         sb.append("                xmlns:er=\"urn:cgi:xmlns:GGIC:EarthResource:1.1\"\n");
         sb.append("                xmlns:wml=\"http://bom\"\n");
         sb.append("                maxFeatures=\"200\">\n");
-        sb.append("  <wfs:Query typeName=\""+featureType+"\">\n");
+        sb.append("  <wfs:Query typeName=\""+featureType+"\"\n");
+        sb.append("                srsName=\"EPSG:4326\">\n");
         sb.append(filterString);
         sb.append("  </wfs:Query>\n");
         sb.append("</wfs:GetFeature>");

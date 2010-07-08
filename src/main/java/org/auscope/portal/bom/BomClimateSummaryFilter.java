@@ -3,12 +3,12 @@ package org.auscope.portal.bom;
 import org.auscope.portal.mineraloccurrence.IFilter;
 
 /**
- * Class that represents ogc:Filter markup for wml:monthly_climate_summary_loc queries
+ * Class that represents ogc:Filter markup for climate summary queries
  * 
  * @author Shane Bailie
  * @version $Id$
  */
-public class BomMonthlySummaryFilter implements IFilter {
+public class BomClimateSummaryFilter implements IFilter {
     private String stationId;
     private String maxTemp;
     private String minTemp;
@@ -21,11 +21,18 @@ public class BomMonthlySummaryFilter implements IFilter {
 
     /**
      * Given search parameters, this object will build
-     * a filter to search for monthly summary data
-     *
-     * @param stationId the id of the station
+     * a filter to search for climate summary data
+     * 
+     * @param stationId the id of the station to query for
+     * @param maxTemp the max temperature to query for
+     * @param minTemp the min temperature to query for
+     * @param rainfall the rainfall amount to query for
+     * @param airPressure the air pressure amount to query for
+     * @param windSpeed the wind speed to query for
+     * @param startDate the start date range to query for
+     * @param endDate the end date range to query for
      */
-    public BomMonthlySummaryFilter(String stationId, 
+    public BomClimateSummaryFilter(String stationId, 
     							   String maxTemp, 
     							   String minTemp,
     							   String rainfall, 
@@ -63,13 +70,13 @@ public class BomMonthlySummaryFilter implements IFilter {
         }
         if(!this.maxTemp.equals("")) {
             filterExpression.append("        <ogc:PropertyIsGreaterThan>\n");
-            filterExpression.append("          <ogc:PropertyName>wml:max_tempreture</ogc:PropertyName>\n");
+            filterExpression.append("          <ogc:PropertyName>wml:max_temp</ogc:PropertyName>\n");
             filterExpression.append("          <ogc:Literal>" + this.maxTemp + "</ogc:Literal>\n");
             filterExpression.append("        </ogc:PropertyIsGreaterThan>");
         }
         if(!this.minTemp.equals("")) {
             filterExpression.append("        <ogc:PropertyIsLessThan>\n");
-            filterExpression.append("          <ogc:PropertyName>wml:min_tempreture</ogc:PropertyName>\n");
+            filterExpression.append("          <ogc:PropertyName>wml:min_temp</ogc:PropertyName>\n");
             filterExpression.append("          <ogc:Literal>" + this.minTemp + "</ogc:Literal>\n");
             filterExpression.append("        </ogc:PropertyIsLessThan>");
         }
@@ -79,18 +86,18 @@ public class BomMonthlySummaryFilter implements IFilter {
             filterExpression.append("          <ogc:Literal>" + this.rainfall + "</ogc:Literal>\n");
             filterExpression.append("        </ogc:PropertyIsGreaterThan>");
         }
-        /*if(!this.airPressure.equals("")) {
+        if(!this.airPressure.equals("")) {
             filterExpression.append("        <ogc:PropertyIsGreaterThan>\n");
-            filterExpression.append("          <ogc:PropertyName>wml:????</ogc:PropertyName>\n");
+            filterExpression.append("          <ogc:PropertyName>wml:max_air_pressure</ogc:PropertyName>\n");
             filterExpression.append("          <ogc:Literal>" + this.airPressure + "</ogc:Literal>\n");
             filterExpression.append("        </ogc:PropertyIsGreaterThan>");
         }
         if(!this.windSpeed.equals("")) {
             filterExpression.append("        <ogc:PropertyIsGreaterThan>\n");
-            filterExpression.append("          <ogc:PropertyName>wml:????</ogc:PropertyName>\n");
+            filterExpression.append("          <ogc:PropertyName>wml:max_wind_speed</ogc:PropertyName>\n");
             filterExpression.append("          <ogc:Literal>" + this.windSpeed + "</ogc:Literal>\n");
             filterExpression.append("        </ogc:PropertyIsGreaterThan>");
-        }*/
+        }
         if(!this.startDate.equals("")) {
             filterExpression.append("        <ogc:PropertyIsGreaterThanOrEqualTo>\n");
             filterExpression.append("          <ogc:PropertyName>wml:date</ogc:PropertyName>\n");

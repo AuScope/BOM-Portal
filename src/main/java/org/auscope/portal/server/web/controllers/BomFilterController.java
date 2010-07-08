@@ -30,7 +30,8 @@ import org.springframework.web.servlet.ModelAndView;
  * <p>
  * It handles the following WML features:
  * <ul>
- * <li>monthly_climate_summary_loc</li>
+ * <li>monthly_climate_summary</li>
+ * <li>daily_climate_summary</li>
  * </ul>
  * </p>
  * 
@@ -55,9 +56,7 @@ public class BomFilterController {
     @Autowired
     public BomFilterController
         ( BomSummaryService bomSummaryService,
-          NvclService nvclService,
-          GmlToKml gmlToKml,
-          CommodityService commodityService) {
+          GmlToKml gmlToKml) {
         
         this.bomSummaryService = bomSummaryService;
         this.gmlToKml = gmlToKml;
@@ -66,8 +65,9 @@ public class BomFilterController {
     // ------------------------------------------- Property Setters and Getters   
     
     /**
-     * Handles the BOM Monthly Summary filter queries.
+     * Handles the BOM Climate Summary filter queries.
      * 
+     * @param featureType the feature type we are querying
      * @param serviceUrl the url of the service to query
      * @param stationId the id of the station to query for
      * @param maxTemp the max temperature to query for
@@ -80,8 +80,9 @@ public class BomFilterController {
      * @param request the HTTP client request
      * @return a WFS response converted into KML
      */
-    @RequestMapping("/doBomMonthlySummaryFilter.do")
-    public ModelAndView doBomMonthlySummaryFilter(
+    @RequestMapping("/doBomClimateSummaryFilter.do")
+    public ModelAndView doBomClimateSummaryFilter(
+    		@RequestParam("featureType") String featureType,
             @RequestParam("serviceUrl") String serviceUrl,
             @RequestParam("stationId") String stationId,
             @RequestParam("maxTemp") String maxTemp,
@@ -95,12 +96,10 @@ public class BomFilterController {
 
         try {
             String gmlBlob;
-            
-            gmlBlob = this.bomSummaryService.getMonthlySummaryGML(serviceUrl, stationId, maxTemp, minTemp,
-            	rainfall, airPressure, windSpeed, startDate, endDate);
 
+            gmlBlob = this.bomSummaryService.getClimateSummaryGML(featureType, serviceUrl, stationId, maxTemp, minTemp,
+            	rainfall, airPressure, windSpeed, startDate, endDate);
             String kmlBlob =  convertToKml(gmlBlob, request, serviceUrl);
-            System.out.println("kml: " + kmlBlob);
             //log.debug(kmlBlob);
             
             //This failure test should be made a little bit more robust
