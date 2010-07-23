@@ -39,7 +39,7 @@ public class TestHttpServiceCaller {
     public void setup() {
         mockHttpClient = context.mock(HttpClient.class);
         httpServiceCaller = new HttpServiceCaller();
-        methodMaker = new WFSGetFeatureMethodMakerPOST();
+        methodMaker = new WFSGetFeatureMethodMakerGET();
     }
 
     /**

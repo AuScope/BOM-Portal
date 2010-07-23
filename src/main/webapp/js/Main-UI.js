@@ -6,6 +6,7 @@ var theglobalexml;
 
 Ext.onReady(function() {
     var map;
+    var markerCluster; 
     var formFactory = new FormFactory();
 
     //-----------Complex Features Panel Configurations
@@ -325,6 +326,7 @@ Ext.onReady(function() {
             //Create our filter panel or use the existing one
             if (record.filterPanel == null) {
                 record.filterPanel = formFactory.getFilterForm(record, map);
+                setFormPanel(record.filterPanel);
             } else if (forceApplyFilter && !filterButton.disabled) {
                 filterButton.handler(); //If we are using an existing one, we may need to retrigger it's filter
             }
@@ -431,10 +433,18 @@ Ext.onReady(function() {
                     });
                     
                     var markers = parser.markers;
+                    
+                    if (markerCluster == undefined){
+                    	markerCluster = new MarkerClusterer(map, markers);
+                    }
+                    
+                    markerCluster.clearMarkers();
+                    markerCluster.addMarkers(markers);
+
                     var overlays = parser.overlays;
                     
                     //Add our single points and overlays
-                    overlayManager.markerManager.addMarkers(markers, 0);
+                    //overlayManager.markerManager.addMarkers(markers, 0);
                     for(var i = 0; i < overlays.length; i++) {
                     	overlayManager.addOverlay(overlays[i]);
                     }
@@ -842,9 +852,9 @@ Ext.onReady(function() {
         autoScroll: true,
         //autosize:true,
         items:[
-            complexFeaturesPanel,
-            genericFeaturesPanel,
-            wmsLayersPanel
+            complexFeaturesPanel//,
+            //genericFeaturesPanel,
+            //wmsLayersPanel
         ]
     });
 

@@ -14,7 +14,7 @@ import org.springframework.stereotype.Repository;
  * @version $Id$
  */
 @Repository
-public class WFSGetFeatureMethodMakerPOST implements IWFSGetFeatureMethodMaker {
+public class WFSGetFeatureMethodMakerPOST { //implements IWFSGetFeatureMethodMaker {
     
     /** Log object for this class. */
     protected final Log log = LogFactory.getLog(getClass());

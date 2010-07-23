@@ -268,15 +268,14 @@
       <Placemark>
          <name><xsl:value-of select="./wml:station"/></name>
          <description>
-            <![CDATA[<table border="1" cellspacing="1" width="100%" bgcolor="#EAF0F8">
-            ]]><xsl:value-of select="./ngcp:GPSSITEID"/>
+            <![CDATA[<table border="1" cellspacing="1" width="100%" bgcolor="#EAF0F8">]]>
             <![CDATA[</td></tr><tr><td>Site ID</td><td>]]><xsl:value-of select="./wml:station"/>
-            <![CDATA[</td></tr><tr><td>Site Name</td><td>]]>   
+            <![CDATA[</td></tr><tr><td>Site Name</td><td>]]><xsl:value-of select="./wml:station_name"/>  
             <![CDATA[</td></tr><tr><td>Commenced</td><td>]]> 
             <![CDATA[</td></tr></table>]]>
          </description>
          
-         <xsl:apply-templates select="./wml:location/gml:Point"/>
+         <xsl:apply-templates select="./wml:geom_loc/gml:Point"/>
          
       </Placemark>
 

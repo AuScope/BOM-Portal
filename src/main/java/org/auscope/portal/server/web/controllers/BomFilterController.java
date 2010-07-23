@@ -15,8 +15,6 @@ import org.apache.commons.logging.LogFactory;
 import org.auscope.portal.server.util.GmlToKml;
 import org.auscope.portal.server.web.ErrorMessages;
 import org.auscope.portal.server.web.service.BomSummaryService;
-import org.auscope.portal.server.web.service.CommodityService;
-import org.auscope.portal.server.web.service.NvclService;
 import org.auscope.portal.server.web.view.JSONModelAndView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -84,21 +82,14 @@ public class BomFilterController {
     public ModelAndView doBomClimateSummaryFilter(
     		@RequestParam("featureType") String featureType,
             @RequestParam("serviceUrl") String serviceUrl,
-            @RequestParam("stationId") String stationId,
-            @RequestParam("maxTemp") String maxTemp,
-            @RequestParam("minTemp") String minTemp,
-            @RequestParam("rainfall") String rainfall,
-            @RequestParam("airPressure") String airPressure,
-            @RequestParam("windSpeed") String windSpeed,
-            @RequestParam("startDate") String startDate,
-            @RequestParam("endDate") String endDate,
+    		@RequestParam("cql") String cql,
             HttpServletRequest request) {
 
         try {
             String gmlBlob;
 
-            gmlBlob = this.bomSummaryService.getClimateSummaryGML(featureType, serviceUrl, stationId, maxTemp, minTemp,
-            	rainfall, airPressure, windSpeed, startDate, endDate);
+            System.out.println("cql: " + cql);
+            gmlBlob = this.bomSummaryService.getClimateSummaryGML(featureType, serviceUrl, cql);
             String kmlBlob =  convertToKml(gmlBlob, request, serviceUrl);
             //log.debug(kmlBlob);
             
