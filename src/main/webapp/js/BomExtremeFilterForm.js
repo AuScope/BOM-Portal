@@ -1,23 +1,14 @@
 /**
- * Builds a form panel for BOM Monthly Summary filters
+ * Builds a form panel for BOM Extreme filters
  * 
  * @param {number} id of this formpanel instance
+ * @param {string} the service url for submit
  */
-BomMonthlySummaryFilterForm = function(id) {
+BomExtremeFilterForm = function(id) {
     
-	var now = new Date();
+var now = new Date();
 	
 	// -------- combo box values
-	// temperature selection values
-	var tempTypes =  [
-         ['Mean Max Temp','wml:mn_max_air_temp'],    
-         ['Mean Min Temp','wml:mn_min_air_temp'],
-         ['Highest Temp','wml:max_temp'],
-         ['Lowest Temp','wml:min_temp'],
-         ['Highest Max Temp','wml:max_max_air_temp'],
-         ['Lowest Max Temp','wml:min_max_air_temp']                       
-    ];
-	
 	// comparison operator selection values
 	var compOpTypes =  [
    		 ['=','='],
@@ -31,12 +22,6 @@ BomMonthlySummaryFilterForm = function(id) {
    		 ['OR',' OR ']                       
    	];
 	
-	// ---------- stores
-	var tempTypeStore = new Ext.data.SimpleStore({
-        fields : ['type','value'],
-        data   : tempTypes
-    });
-	
 	var compOpTypeStore = new Ext.data.SimpleStore({
 		fields : ['type','value'],
         data   : compOpTypes
@@ -48,20 +33,21 @@ BomMonthlySummaryFilterForm = function(id) {
     });
 	
 	// ---------- combo boxes
-	var tempCombo = buildCombo('', tempTypeStore, 'monTempType', 'Select', 130);
-	var logOpCombo = buildCombo('Logical Operator', logOpTypeStore, 'monOpLogic', ' AND ', 50);
-	var opStation = buildCombo('', compOpTypeStore, 'monOpStation', '=', 35);
-	var opTemp = buildCombo('', compOpTypeStore, 'monOpTemp', '=', 35);
-	var opRainfall = buildCombo('', compOpTypeStore, 'monOpRainfall', '=', 35);
-	var opAirPressure = buildCombo('', compOpTypeStore, 'monOpAirPressure', '=', 35);
-	var opWindSpeed = buildCombo('', compOpTypeStore, 'monOpWindSpeed', '=', 35);
-	var opWindDirection = buildCombo('', compOpTypeStore, 'monOpWindDirection', '=', 35);
+	var logOpCombo = buildCombo('Logical Operator', logOpTypeStore, 'xOpLogic', ' AND ', 50);
+	var opStation = buildCombo('', compOpTypeStore, 'xOpStation', '=', 35);
+	var opMaxTemp = buildCombo('', compOpTypeStore, 'xOpMaxTemp', '=', 35);
+	var opMinTemp = buildCombo('', compOpTypeStore, 'xOpMinTemp', '=', 35);
+	var opMaxAirPressure = buildCombo('', compOpTypeStore, 'xOpMaxAirPressure', '=', 35);
+	var opMinAirPressure = buildCombo('', compOpTypeStore, 'xOpMinAirPressure', '=', 35);
+	var opMaxWindSpeed = buildCombo('', compOpTypeStore, 'xOpMaxWindSpeed', '=', 35);
+	var opMinWindSpeed = buildCombo('', compOpTypeStore, 'xOpMinWindSpeed', '=', 35);
+	var opMaxWindDirection = buildCombo('', compOpTypeStore, 'xOpMaxWindDirection', '=', 35);
+	var opMinWindDirection = buildCombo('', compOpTypeStore, 'xOpMinWindDirection', '=', 35);
 	
 	var cqlField = new Ext.form.TextArea({  
         fieldLabel : 'CQL',
         name       : 'cql',
-        id		   : 'monCql',
-        value	   : "wml:date>='" + now.format("Y-m-d") + "' AND wml:date<='" + now.format("Y-m-d" + "'"), 
+        id		   : 'xCql',
         width	   : 260
     });
 	
@@ -80,14 +66,14 @@ BomMonthlySummaryFilterForm = function(id) {
         autoHeight: true,
         items       : [{
             xtype      :'fieldset',
-            title      : 'Monthly Summary Filter Properties',
+            title      : 'Extreme Filter Properties',
             autoHeight : true,
-            labelWidth: 128,
+            labelWidth : 128,
             items      : [
               {
   			    xtype      : 'hidden',
   			    name       : 'featureType',
-  			    value: 'wml:monthly_climate_summary'
+  			    value: 'wml:extreme'
   			  },{
   				  // column layout with 2 columns
                   layout:'column',
@@ -96,40 +82,18 @@ BomMonthlySummaryFilterForm = function(id) {
                       // left column
                       border: false,
                       layout:'form',
-                      bodyStyle:'margin:0 3px 0 0',
+                      bodyStyle:'margin:0 3px 0 0px',
                       items:[{
                     	  xtype      : 'numberfield',
                           fieldLabel : 'Station',
                           name       : 'wml:station',
-                          id		 : 'monStation'
+                          id		 : 'xStation'
                       }]
                   },{
                       // right column
                       width: 40,
                       border: false,
                       items:[opStation]
-                  }]
-              },{
-                  // column layout with 3 columns
-                  layout:'column',
-                  border: false,
-                  bodyStyle:'margin:0 0 4px 0',
-                  items: [{
-                      width: 133,
-                      border: false,
-                      items: [tempCombo]
-                  },{
-                      width: 130,
-                      border: false,
-                      items: [{
-                    	  xtype      : 'numberfield',
-                    	  name       : 'tempValue',
-                    	  id		 : 'monTempValue'
-                      }]
-                  },{
-                      width: 40,
-                      border: false,
-                      items: [opTemp]
                   }]
               },{
   				  // column layout with 2 columns
@@ -142,15 +106,36 @@ BomMonthlySummaryFilterForm = function(id) {
                       bodyStyle:'margin:0 3px 0 0',
                       items:[{
                     	  xtype      : 'numberfield',
-                          fieldLabel : 'Rainfall',
-                          name       : 'wml:rainfall',
-                          id		 : 'monRainfall'
+                          fieldLabel : 'Highest Temp',
+                          name       : 'wml:max_temp',
+                          id		 : 'xMaxTemp'
                       }]
                   },{
                       // right column
                       width: 40,
                       border: false,
-                      items:[opRainfall]
+                      items:[opMaxTemp]
+                  }]
+              },{
+  				  // column layout with 2 columns
+                  layout:'column',
+                  border: false,	
+                  items:[{
+                      // left column
+                      border: false,
+                      layout:'form',
+                      bodyStyle:'margin:0 3px 0 0',
+                      items:[{
+                    	  xtype      : 'numberfield',
+                          fieldLabel : 'Lowest Temp',
+                          name       : 'wml:min_temp',
+                          id		 : 'xMinTemp'
+                      }]
+                  },{
+                      // right column
+                      width: 40,
+                      border: false,
+                      items:[opMinTemp]
                   }]
               },{
   				  // column layout with 2 columns
@@ -165,13 +150,34 @@ BomMonthlySummaryFilterForm = function(id) {
                     	  xtype      : 'numberfield',
                           fieldLabel : 'Max Air Pressure',
                           name       : 'wml:max_air_pressure',
-                          id		 : 'monAirPressure'
+                          id		 : 'xMaxAirPressure'
                       }]
                   },{
                       // right column
                       width: 40,
                       border: false,
-                      items:[opAirPressure]
+                      items:[opMaxAirPressure]
+                  }]
+              },{
+  				  // column layout with 2 columns
+                  layout:'column',
+                  border: false,	
+                  items:[{
+                      // left column
+                      border: false,
+                      layout:'form',
+                      bodyStyle:'margin:0 3px 0 0',
+                      items:[{
+                    	  xtype      : 'numberfield',
+                          fieldLabel : 'Min Air Pressure',
+                          name       : 'wml:min_air_pressure',
+                          id		 : 'xMinAirPressure'
+                      }]
+                  },{
+                      // right column
+                      width: 40,
+                      border: false,
+                      items:[opMinAirPressure]
                   }]
               },{
   				  // column layout with 2 columns
@@ -186,13 +192,34 @@ BomMonthlySummaryFilterForm = function(id) {
                     	  xtype      : 'numberfield',
                           fieldLabel : 'Max Wind Speed',
                           name       : 'wml:max_wind_speed',
-                          id		 : 'monWindSpeed'
+                          id		 : 'xMaxWindSpeed'
                       }]
                   },{
                       // right column
                       width: 40,
                       border: false,
-                      items:[opWindSpeed]
+                      items:[opMaxWindSpeed]
+                  }]
+              },{
+  				  // column layout with 2 columns
+                  layout:'column',
+                  border: false,	
+                  items:[{
+                      // left column
+                      border: false,
+                      layout:'form',
+                      bodyStyle:'margin:0 3px 0 0',
+                      items:[{
+                    	  xtype      : 'numberfield',
+                          fieldLabel : 'Min Wind Speed',
+                          name       : 'wml:min_wind_speed',
+                          id		 : 'xMinWindSpeed'
+                      }]
+                  },{
+                      // right column
+                      width: 40,
+                      border: false,
+                      items:[opMinWindSpeed]
                   }]
               },{
   				  // column layout with 2 columns
@@ -207,41 +234,35 @@ BomMonthlySummaryFilterForm = function(id) {
                     	  xtype      : 'numberfield',
                           fieldLabel : 'Max Wind Direction',
                           name       : 'wml:max_wind_direction',
-                          id		 : 'monWindDirection'
+                          id		 : 'xMaxWindDirection'
                       }]
                   },{
                       // right column
                       width: 40,
                       border: false,
-                      items:[opWindDirection]
+                      items:[opMaxWindDirection]
                   }]
               },{
-            	  layout	:'form',
-            	  border: false,
-            	  bodyStyle:'margin:0 3px 0 0',
-            	  items		:[{
-            		  xtype		 : 'datefield',
-                      fieldLabel : 'Start Date',
-                      name		 : 'wml:date',
-                      format 	 : "Y-m-d",
-                      value		 : now.format("Y-m-d"),
-                      blankText	 : now.format("Y-m-d"),
-                      editable   : false,
-                      id		 : 'monStartDate'
-            	  }]
-              },{
-            	  layout	:'form',
-            	  border: false,
-            	  bodyStyle:'margin:0 3px 0 0',
-            	  items		:[{
-            		  xtype		 : 'datefield',
-                      fieldLabel : 'End Date',
-                      name		 : 'wml:date',
-                      format	 : "Y-m-d",
-                      value		 : now.format("Y-m-d"),
-                      editable   : false,
-                      id		 : 'monEndDate'
-            	  }]
+  				  // column layout with 2 columns
+                  layout:'column',
+                  border: false,	
+                  items:[{
+                      // left column
+                      border: false,
+                      layout:'form',
+                      bodyStyle:'margin:0 3px 0 0',
+                      items:[{
+                    	  xtype      : 'numberfield',
+                          fieldLabel : 'Min Wind Direction',
+                          name       : 'wml:min_wind_direction',
+                          id		 : 'xMinWindDirection'
+                      }]
+                  },{
+                      // right column
+                      width: 40,
+                      border: false,
+                      items:[opMinWindDirection]
+                  }]
               },{
             	  layout	:'form',
             	  border	: false,
@@ -268,7 +289,7 @@ BomMonthlySummaryFilterForm = function(id) {
 		if (key < fieldArray.length - 1){
 			
 			var field = fieldArray[key];
-			field.addListener("change", monthlySummaryChangeHandler);
+			field.addListener("change", extremeChangeHandler);
 		}
 	}
 };
@@ -293,4 +314,4 @@ function buildCombo(label, store, id, displayValue, width) {
 	return compOpCombo;
 }
 
-BomMonthlySummaryFilterForm.prototype = new Ext.FormPanel();
+BomExtremeFilterForm.prototype = new Ext.FormPanel();

@@ -86,16 +86,6 @@ var now = new Date();
   			    name       : 'featureType',
   			    value: 'wml:daily_climate_summary'
   			  },{
-            	  xtype      : 'textfield',
-                  fieldLabel : 'Station Name',
-                  name       : 'wml:station_name',
-                  id		 : 'dayStationName'
-              },{
-            	  xtype      : 'textfield',
-                  fieldLabel : 'Station State',
-                  name       : 'wml:station_state',
-                  id		 : 'dayStationState'
-              },{
   				  // column layout with 2 columns
                   layout:'column',
                   border: false,	

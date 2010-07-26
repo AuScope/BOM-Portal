@@ -78,6 +78,7 @@ KMLParser.prototype.parsePoint = function(name, description, icon, pointNode) {
 KMLParser.prototype.makeMarkers = function(icon, markerHandler) {
     
     var markers = [];
+    var coords = [];
     // var placemarks = this.rootNode.selectNodes(".//*[local-name() = 'Placemark']");
     // alert(placemarks[0].selectSingleNode(".//*[local-name() = 'Placemark']").text);
     
@@ -131,7 +132,11 @@ KMLParser.prototype.makeMarkers = function(icon, markerHandler) {
                 if(markerHandler)
                     markerHandler(mapItem);
 
-                this.markers.push(mapItem);
+                // only add 1 marker per station
+                if (!containsCoords(coords, mapItem.getLatLng())){
+                	coords.push(mapItem.getLatLng());
+                	this.markers.push(mapItem);
+                }
         	}
             
         }
@@ -139,5 +144,16 @@ KMLParser.prototype.makeMarkers = function(icon, markerHandler) {
 
     return markers;
 };
+
+// check if the station had been added to the list of marked stations
+function containsCoords(a, obj) {
+  var i = a.length;
+  while (i--) {
+    if (a[i].x == obj.x && a[i].y == obj.y) {
+      return true;
+    }
+  }
+  return false;
+}
 
 

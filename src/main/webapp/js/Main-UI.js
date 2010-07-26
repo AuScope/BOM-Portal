@@ -6,7 +6,6 @@ var theglobalexml;
 
 Ext.onReady(function() {
     var map;
-    var markerCluster; 
     var formFactory = new FormFactory();
 
     //-----------Complex Features Panel Configurations
@@ -433,18 +432,10 @@ Ext.onReady(function() {
                     });
                     
                     var markers = parser.markers;
-                    
-                    if (markerCluster == undefined){
-                    	markerCluster = new MarkerClusterer(map, markers);
-                    }
-                    
-                    markerCluster.clearMarkers();
-                    markerCluster.addMarkers(markers);
-
                     var overlays = parser.overlays;
                     
                     //Add our single points and overlays
-                    //overlayManager.markerManager.addMarkers(markers, 0);
+                    overlayManager.markerManager.addMarkers(markers, 0);
                     for(var i = 0; i < overlays.length; i++) {
                     	overlayManager.addOverlay(overlays[i]);
                     }

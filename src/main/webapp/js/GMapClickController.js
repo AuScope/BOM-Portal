@@ -38,7 +38,7 @@ var genericParserClickHandler = function (map, overlay, latlng, activeLayersStor
 		
 
 	return false;
-}
+};
 
 /**
  * When someone clicks on the google maps we show popups specific to each 
@@ -61,7 +61,9 @@ var gMapClickController = function(map, overlay, latlng, activeLayersStore) {
         else if (overlay.typeName == "ngcp:GnssStation") {
             new GeodesyMarker(overlay.wfsUrl, "geodesy:station_observations", overlay.title, overlay, overlay.description).getMarkerClickedFn()();
         }
-        else if (overlay.typeName == "wml:monthly_climate_summary" || overlay.typeName == "wml:daily_climate_summary") {
+        else if (overlay.typeName == "wml:monthly_climate_summary" || 
+        		overlay.typeName == "wml:daily_climate_summary" ||
+        		overlay.typeName == "wml:extreme") {
             new BomMarker(overlay.title, overlay, overlay.description).markerClicked()();
         }
         else if (overlay.description != null) {

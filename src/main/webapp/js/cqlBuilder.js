@@ -12,8 +12,6 @@ function dailySummaryChangeHandler()
 {
 	// get the input values
 	cqlString = "";
-	var stationName = formPanel.findById("dayStationName");
-	var stationState = formPanel.findById("dayStationState");
 	var station = formPanel.findById("dayStation");
 	var opStation = formPanel.findById("dayOpStation");
 	var tempType = formPanel.findById("dayTempType");
@@ -35,8 +33,6 @@ function dailySummaryChangeHandler()
 	var stringComparitor = " like '";
 	
 	// string the entered values together to construct the cql
-	appendTextFieldCql(stationName, stringComparitor, opLogicString);
-	appendTextFieldCql(stationState, stringComparitor, opLogicString);
 	appendNumberFieldCql(station, opStation, opLogicString);
 	
 	// specific processing for the temp select input
@@ -58,8 +54,6 @@ function monthlySummaryChangeHandler()
 {
 	// get the input values
 	cqlString = "";
-	var stationName = formPanel.findById("monStationName");
-	var stationState = formPanel.findById("monStationState");
 	var station = formPanel.findById("monStation");
 	var opStation = formPanel.findById("monOpStation");
 	var tempType = formPanel.findById("monTempType");
@@ -81,8 +75,6 @@ function monthlySummaryChangeHandler()
 	var stringComparitor = " like '";
 	
 	// string the entered values together to construct the cql
-	appendTextFieldCql(stationName, stringComparitor, opLogicString);
-	appendTextFieldCql(stationState, stringComparitor, opLogicString);
 	appendNumberFieldCql(station, opStation, opLogicString);
 	
 	// specific processing for the temp select input
@@ -95,6 +87,50 @@ function monthlySummaryChangeHandler()
 	appendNumberFieldCql(windSpeed, opWindSpeed, opLogicString);
 	appendNumberFieldCql(windDirection, opWindDirection, opLogicString);
 	appendDateRangeCql(startDate, endDate);
+	
+	// display the cql in the text area
+	cql.setValue(cqlString);
+}
+
+function extremeChangeHandler()
+{
+	// get the input values
+	cqlString = "";
+	var station = formPanel.findById("xStation");
+	var opStation = formPanel.findById("xOpStation");
+	var maxTemp = formPanel.findById("xMaxTemp");	
+	var opMaxTemp = formPanel.findById("xOpMaxTemp");
+	var minTemp = formPanel.findById("xMinTemp");	
+	var opMinTemp = formPanel.findById("xOpMinTemp");
+	var maxAirPressure = formPanel.findById("xMaxAirPressure");	
+	var opMaxAirPressure = formPanel.findById("xOpMaxAirPressure");
+	var minAirPressure = formPanel.findById("xMinAirPressure");	
+	var opMinAirPressure = formPanel.findById("xOpMinAirPressure");
+	var maxWindSpeed = formPanel.findById("xMaxWindSpeed");	
+	var opMaxWindSpeed = formPanel.findById("xOpMaxWindSpeed");
+	var minWindSpeed = formPanel.findById("xMinWindSpeed");	
+	var opMinWindSpeed = formPanel.findById("xOpMinWindSpeed");
+	var maxWindDirection = formPanel.findById("xMaxWindDirection");	
+	var opMaxWindDirection = formPanel.findById("xOpMaxWindDirection");
+	var minWindDirection = formPanel.findById("xMinWindDirection");	
+	var opMinWindDirection = formPanel.findById("xOpMinWindDirection");
+	var opLogic = formPanel.findById("xOpLogic");
+	var opLogicString = opLogic.getValue();
+	var cql = formPanel.findById("xCql");
+	var stringComparitor = " like '";
+	
+	// string the entered values together to construct the cql
+	appendNumberFieldCql(station, opStation, opLogicString);
+	appendNumberFieldCql(maxTemp, opMaxTemp, opLogicString);
+	appendNumberFieldCql(minTemp, opMinTemp, opLogicString);
+	appendNumberFieldCql(maxAirPressure, opMaxAirPressure, opLogicString);
+	appendNumberFieldCql(minAirPressure, opMinAirPressure, opLogicString);
+	appendNumberFieldCql(maxWindSpeed, opMaxWindSpeed, opLogicString);
+	appendNumberFieldCql(minWindSpeed, opMinWindSpeed, opLogicString);
+	appendNumberFieldCql(maxWindDirection, opMaxWindDirection, opLogicString);
+	appendNumberFieldCql(minWindDirection, opMinWindDirection, opLogicString);
+	
+	trimCql(opLogicString);
 	
 	// display the cql in the text area
 	cql.setValue(cqlString);
@@ -124,5 +160,14 @@ function appendDateRangeCql(startDate, endDate){
 	if (endDate.getValue().length != 0){
 		var dateString = "'" + endDate.getValue().format("Y-m-d") + "'"; 
 		cqlString += endDate.getName() + "<=" + dateString;
+	}
+}
+
+// removes any trailing logical operator from the cql string 
+function trimCql(logicalOp){
+	var opLength = logicalOp.length;
+	
+	if(cqlString.substr(-opLength) === logicalOp) {
+		cqlString = cqlString.substring(0, cqlString.length - opLength);
 	}
 }

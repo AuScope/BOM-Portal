@@ -30,6 +30,7 @@ import org.springframework.web.servlet.ModelAndView;
  * <ul>
  * <li>monthly_climate_summary</li>
  * <li>daily_climate_summary</li>
+ * <li>extreme</li>
  * </ul>
  * </p>
  * 
