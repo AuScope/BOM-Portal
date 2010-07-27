@@ -6,6 +6,7 @@ var theglobalexml;
 
 Ext.onReady(function() {
     var map;
+    var filterParameters;
     var formFactory = new FormFactory();
 
     //-----------Complex Features Panel Configurations
@@ -399,7 +400,7 @@ Ext.onReady(function() {
         //set the status as loading for this record
         selectedRecord.set('loadingStatus', '<img src="js/external/extjs/resources/images/default/grid/loading.gif">');
 
-        var filterParameters = filterPanel.getLayout().activeItem == filterPanel.getComponent(0) ? "&typeName=" + selectedRecord.get('typeName') : filterPanel.getLayout().activeItem.getForm().getValues(true);
+        filterParameters = filterPanel.getLayout().activeItem == filterPanel.getComponent(0) ? "&typeName=" + selectedRecord.get('typeName') : filterPanel.getLayout().activeItem.getForm().getValues(true);
         
         for (var i = 0; i < serviceURLs.length; i++) {
             handleQuery(serviceURLs[i], selectedRecord, proxyURL, iconUrl, overlayManager, filterParameters, function() {
@@ -959,7 +960,7 @@ Ext.onReady(function() {
 
     //when updateCSWRecords person clicks on updateCSWRecords marker then do something
     GEvent.addListener(map, "click", function(overlay, latlng) {
-        gMapClickController(map, overlay, latlng, activeLayersStore);
+        gMapClickController(map, overlay, latlng, activeLayersStore, filterParameters);
     });
 
     GEvent.addListener(map, "mousemove", function(latlng){

@@ -46,7 +46,7 @@ var now = new Date();
 	
 	var cqlField = new Ext.form.TextArea({  
         fieldLabel : 'CQL',
-        name       : 'cql',
+        name       : 'cql_filter',
         id		   : 'xCql',
         width	   : 260
     });
@@ -66,13 +66,13 @@ var now = new Date();
         autoHeight: true,
         items       : [{
             xtype      :'fieldset',
-            title      : 'Extreme Filter Properties',
+            title      : 'Extremes Filter Properties',
             autoHeight : true,
             labelWidth : 128,
             items      : [
               {
   			    xtype      : 'hidden',
-  			    name       : 'featureType',
+  			    name       : 'typeName',
   			    value: 'wml:extreme'
   			  },{
   				  // column layout with 2 columns
@@ -87,7 +87,8 @@ var now = new Date();
                     	  xtype      : 'numberfield',
                           fieldLabel : 'Station',
                           name       : 'wml:station',
-                          id		 : 'xStation'
+                          id		 : 'xStation',
+                          submitValue: false
                       }]
                   },{
                       // right column
@@ -108,7 +109,8 @@ var now = new Date();
                     	  xtype      : 'numberfield',
                           fieldLabel : 'Highest Temp',
                           name       : 'wml:max_temp',
-                          id		 : 'xMaxTemp'
+                          id		 : 'xMaxTemp',
+                          submitValue: false
                       }]
                   },{
                       // right column
@@ -129,7 +131,8 @@ var now = new Date();
                     	  xtype      : 'numberfield',
                           fieldLabel : 'Lowest Temp',
                           name       : 'wml:min_temp',
-                          id		 : 'xMinTemp'
+                          id		 : 'xMinTemp',
+                          submitValue: false
                       }]
                   },{
                       // right column
@@ -150,7 +153,8 @@ var now = new Date();
                     	  xtype      : 'numberfield',
                           fieldLabel : 'Max Air Pressure',
                           name       : 'wml:max_air_pressure',
-                          id		 : 'xMaxAirPressure'
+                          id		 : 'xMaxAirPressure',
+                          submitValue: false
                       }]
                   },{
                       // right column
@@ -171,7 +175,8 @@ var now = new Date();
                     	  xtype      : 'numberfield',
                           fieldLabel : 'Min Air Pressure',
                           name       : 'wml:min_air_pressure',
-                          id		 : 'xMinAirPressure'
+                          id		 : 'xMinAirPressure',
+                          submitValue: false
                       }]
                   },{
                       // right column
@@ -192,7 +197,8 @@ var now = new Date();
                     	  xtype      : 'numberfield',
                           fieldLabel : 'Max Wind Speed',
                           name       : 'wml:max_wind_speed',
-                          id		 : 'xMaxWindSpeed'
+                          id		 : 'xMaxWindSpeed',
+                          submitValue: false
                       }]
                   },{
                       // right column
@@ -213,7 +219,8 @@ var now = new Date();
                     	  xtype      : 'numberfield',
                           fieldLabel : 'Min Wind Speed',
                           name       : 'wml:min_wind_speed',
-                          id		 : 'xMinWindSpeed'
+                          id		 : 'xMinWindSpeed',
+                          submitValue: false
                       }]
                   },{
                       // right column
@@ -234,7 +241,8 @@ var now = new Date();
                     	  xtype      : 'numberfield',
                           fieldLabel : 'Max Wind Direction',
                           name       : 'wml:max_wind_direction',
-                          id		 : 'xMaxWindDirection'
+                          id		 : 'xMaxWindDirection',
+                          submitValue: false
                       }]
                   },{
                       // right column
@@ -255,7 +263,8 @@ var now = new Date();
                     	  xtype      : 'numberfield',
                           fieldLabel : 'Min Wind Direction',
                           name       : 'wml:min_wind_direction',
-                          id		 : 'xMinWindDirection'
+                          id		 : 'xMinWindDirection',
+                          submitValue: false
                       }]
                   },{
                       // right column
@@ -308,7 +317,8 @@ function buildCombo(label, store, id, displayValue, width) {
         displayField   : 'type',
         valueField     : 'value',
         value          : displayValue,
-        id			   : id
+        id			   : id,
+        submitValue	   : false
     });
 	
 	return compOpCombo;

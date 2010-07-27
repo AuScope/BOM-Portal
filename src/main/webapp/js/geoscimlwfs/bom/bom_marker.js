@@ -13,10 +13,11 @@
 * @return A new {@link BomMarker}
 */
 
-function BomMarker (stationId, marker, description) {
+function BomMarker (stationId, marker, description, filterParameters) {
     this.stationId = marker.title;
     this.moMarker = marker;
     this.msSummaryHtml = description;
+    this.filter = filterParameters;
 }
 
 /**
@@ -41,28 +42,40 @@ BomMarker.prototype.moMarker = null;
 BomMarker.prototype.markerClicked = BomMarker_markerClicked;
 
 /**
-* The function called when the marker for this station is clicked.<br> 
-* This creats the information window displaying station information.  
+* The function called when the marker for this site is clicked.<br> 
+* This creates the information window displaying climate summary information.  
 */ 
 function BomMarker_markerClicked()
 {
-  var sId = this.stationId;//oGeodesyStation.msId;
+  var sId = this.stationId;
   var oMarker = this.moMarker;
+  var oCql = this.filter;
 
   //show loading status
   oMarker.openInfoWindowHtml('<div > <img src="js/external/extjs/resources/images/default/grid/loading.gif"> Loading... </div>');
     
   /**
-  * The popup for updateCSWRecords marker contains two tabs - Summary and Renix Files
-  * Summary contains ID, Name, Location, Log Url of the station
-  * Renix Files contains updateCSWRecords scrollable list of Renix file Urls for the station.
+  * The popup for updateCSWRecords marker contains two tabs - Summary and WFS URL
+  * Summary contains Site ID, Site Name and Commenced Date
+  * WFS URL contains a URL pointing to the WFS request for the selected filter criteria with 
+  * the addition of the station id of the site selected.
   */
   var label1 = 'Summary';
-  var label2 = 'Info';
-  var summaryHtml = "";
-  var renixFilesHtml = "";
+  var label2 = 'WFS URL';
+  
+  // check if there are any cql parameters and add the AND if there are
+  if (!oCql.endsWith("=")) {
+	  oCql += " AND ";
+  }
+	  
+  var url = oMarker.wfsUrl + "?service=WFS&version=1.1.0&request=GetFeature&srsName=EPSG%3A4326&" + oCql + "wml:station=" + sId;
+  var urlHtml = '<a target="_blank" href="' + url + '">WFS Request for Station '+ sId + '</a>';
   
   // Open the popup window for the marker with the tabs Main and Data
   oMarker.openInfoWindowTabsHtml([new GInfoWindowTab(label1, this.msSummaryHtml),
-                                  new GInfoWindowTab(label2, "")], {autoScroll:true});
+                                  new GInfoWindowTab(label2, urlHtml)], {autoScroll:true});
 }  
+
+String.prototype.endsWith = function(str){
+	return (this.match(str+"$")==str);
+};

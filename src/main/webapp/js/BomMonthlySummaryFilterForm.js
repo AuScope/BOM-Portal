@@ -59,7 +59,7 @@ BomMonthlySummaryFilterForm = function(id) {
 	
 	var cqlField = new Ext.form.TextArea({  
         fieldLabel : 'CQL',
-        name       : 'cql',
+        name       : 'cql_filter',
         id		   : 'monCql',
         value	   : "wml:date>='" + now.format("Y-m-d") + "' AND wml:date<='" + now.format("Y-m-d" + "'"), 
         width	   : 260
@@ -86,7 +86,7 @@ BomMonthlySummaryFilterForm = function(id) {
             items      : [
               {
   			    xtype      : 'hidden',
-  			    name       : 'featureType',
+  			    name       : 'typeName',
   			    value: 'wml:monthly_climate_summary'
   			  },{
   				  // column layout with 2 columns
@@ -101,7 +101,8 @@ BomMonthlySummaryFilterForm = function(id) {
                     	  xtype      : 'numberfield',
                           fieldLabel : 'Station',
                           name       : 'wml:station',
-                          id		 : 'monStation'
+                          id		 : 'monStation',
+                          submitValue: false
                       }]
                   },{
                       // right column
@@ -124,7 +125,8 @@ BomMonthlySummaryFilterForm = function(id) {
                       items: [{
                     	  xtype      : 'numberfield',
                     	  name       : 'tempValue',
-                    	  id		 : 'monTempValue'
+                    	  id		 : 'monTempValue',
+                    	  submitValue: false
                       }]
                   },{
                       width: 40,
@@ -144,7 +146,8 @@ BomMonthlySummaryFilterForm = function(id) {
                     	  xtype      : 'numberfield',
                           fieldLabel : 'Rainfall',
                           name       : 'wml:rainfall',
-                          id		 : 'monRainfall'
+                          id		 : 'monRainfall',
+                          submitValue: false
                       }]
                   },{
                       // right column
@@ -165,7 +168,8 @@ BomMonthlySummaryFilterForm = function(id) {
                     	  xtype      : 'numberfield',
                           fieldLabel : 'Max Air Pressure',
                           name       : 'wml:max_air_pressure',
-                          id		 : 'monAirPressure'
+                          id		 : 'monAirPressure',
+                          submitValue: false
                       }]
                   },{
                       // right column
@@ -186,7 +190,8 @@ BomMonthlySummaryFilterForm = function(id) {
                     	  xtype      : 'numberfield',
                           fieldLabel : 'Max Wind Speed',
                           name       : 'wml:max_wind_speed',
-                          id		 : 'monWindSpeed'
+                          id		 : 'monWindSpeed',
+                          submitValue: false
                       }]
                   },{
                       // right column
@@ -207,7 +212,8 @@ BomMonthlySummaryFilterForm = function(id) {
                     	  xtype      : 'numberfield',
                           fieldLabel : 'Max Wind Direction',
                           name       : 'wml:max_wind_direction',
-                          id		 : 'monWindDirection'
+                          id		 : 'monWindDirection',
+                          submitValue: false
                       }]
                   },{
                       // right column
@@ -227,7 +233,8 @@ BomMonthlySummaryFilterForm = function(id) {
                       value		 : now.format("Y-m-d"),
                       blankText	 : now.format("Y-m-d"),
                       editable   : false,
-                      id		 : 'monStartDate'
+                      id		 : 'monStartDate',
+                      submitValue: false
             	  }]
               },{
             	  layout	:'form',
@@ -240,7 +247,8 @@ BomMonthlySummaryFilterForm = function(id) {
                       format	 : "Y-m-d",
                       value		 : now.format("Y-m-d"),
                       editable   : false,
-                      id		 : 'monEndDate'
+                      id		 : 'monEndDate',
+                      submitValue: false
             	  }]
               },{
             	  layout	:'form',
@@ -287,7 +295,8 @@ function buildCombo(label, store, id, displayValue, width) {
         displayField   : 'type',
         valueField     : 'value',
         value          : displayValue,
-        id			   : id
+        id			   : id,
+        submitValue    : false
     });
 	
 	return compOpCombo;

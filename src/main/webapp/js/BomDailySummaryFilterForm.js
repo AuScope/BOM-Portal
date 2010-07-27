@@ -56,7 +56,7 @@ var now = new Date();
 	
 	var cqlField = new Ext.form.TextArea({  
         fieldLabel : 'CQL',
-        name       : 'cql',
+        name       : 'cql_filter',
         id		   : 'dayCql',
         value	   : "wml:date>='" + now.format("Y-m-d") + "' AND wml:date<='" + now.format("Y-m-d" + "'"), 
         width	   : 260
@@ -83,7 +83,7 @@ var now = new Date();
             items      : [
               {
   			    xtype      : 'hidden',
-  			    name       : 'featureType',
+  			    name       : 'typeName',
   			    value: 'wml:daily_climate_summary'
   			  },{
   				  // column layout with 2 columns
@@ -98,7 +98,8 @@ var now = new Date();
                     	  xtype      : 'numberfield',
                           fieldLabel : 'Station',
                           name       : 'wml:station',
-                          id		 : 'dayStation'
+                          id		 : 'dayStation',
+                          submitValue: false
                       }]
                   },{
                       // right column
@@ -121,7 +122,8 @@ var now = new Date();
                       items: [{
                     	  xtype      : 'numberfield',
                     	  name       : 'tempValue',
-                    	  id		 : 'dayTempValue'
+                    	  id		 : 'dayTempValue',
+                    	  submitValue: false
                       }]
                   },{
                       width: 40,
@@ -141,7 +143,8 @@ var now = new Date();
                     	  xtype      : 'numberfield',
                           fieldLabel : 'Rainfall',
                           name       : 'wml:rainfall',
-                          id		 : 'dayRainfall'
+                          id		 : 'dayRainfall',
+                          submitValue: false
                       }]
                   },{
                       // right column
@@ -162,7 +165,8 @@ var now = new Date();
                     	  xtype      : 'numberfield',
                           fieldLabel : 'Max Air Pressure',
                           name       : 'wml:max_air_pressure',
-                          id		 : 'dayAirPressure'
+                          id		 : 'dayAirPressure',
+                          submitValue: false
                       }]
                   },{
                       // right column
@@ -183,7 +187,8 @@ var now = new Date();
                     	  xtype      : 'numberfield',
                           fieldLabel : 'Max Wind Speed',
                           name       : 'wml:max_wind_speed',
-                          id		 : 'dayWindSpeed'
+                          id		 : 'dayWindSpeed',
+                          submitValue: false
                       }]
                   },{
                       // right column
@@ -204,7 +209,8 @@ var now = new Date();
                     	  xtype      : 'numberfield',
                           fieldLabel : 'Max Wind Direction',
                           name       : 'wml:max_wind_direction',
-                          id		 : 'dayWindDirection'
+                          id		 : 'dayWindDirection',
+                          submitValue: false
                       }]
                   },{
                       // right column
@@ -224,7 +230,8 @@ var now = new Date();
                       value		 : now.format("Y-m-d"),
                       blankText	 : now.format("Y-m-d"),
                       editable   : false,
-                      id		 : 'dayStartDate'
+                      id		 : 'dayStartDate',
+                      submitValue: false
             	  }]
               },{
             	  layout	:'form',
@@ -237,7 +244,8 @@ var now = new Date();
                       format	 : "Y-m-d",
                       value		 : now.format("Y-m-d"),
                       editable   : false,
-                      id		 : 'dayEndDate'
+                      id		 : 'dayEndDate',
+                      submitValue: false
             	  }]
               },{
             	  layout	:'form',
@@ -284,7 +292,8 @@ function buildCombo(label, store, id, displayValue, width) {
         displayField   : 'type',
         valueField     : 'value',
         value          : displayValue,
-        id			   : id
+        id			   : id,
+        submitValue    : false
     });
 	
 	return compOpCombo;

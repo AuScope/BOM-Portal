@@ -81,9 +81,9 @@ public class BomFilterController {
      */
     @RequestMapping("/doBomClimateSummaryFilter.do")
     public ModelAndView doBomClimateSummaryFilter(
-    		@RequestParam("featureType") String featureType,
+    		@RequestParam("typeName") String featureType,
             @RequestParam("serviceUrl") String serviceUrl,
-    		@RequestParam("cql") String cql,
+    		@RequestParam("cql_filter") String cql,
             HttpServletRequest request) {
 
         try {
