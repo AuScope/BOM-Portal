@@ -3,10 +3,10 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd"> 
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.auscope.portal</groupId>
-    <artifactId>AuScope-Portal</artifactId>
+    <artifactId>BOM-Portal</artifactId>
     <packaging>war</packaging>
-    <version>2.5.0</version>
-    <name>AuScope-Portal Maven Webapp</name>
+    <version>1.0.0</version>
+    <name>BOM-Portal Maven Webapp</name>
     <url>http://maven.apache.org</url>
     <scm>
         <connection>scm:svn:https://svn.auscope.org/subversion/AuScopePortal/AuScope-Portal/trunk</connection>
