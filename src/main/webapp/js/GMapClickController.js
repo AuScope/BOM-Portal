@@ -64,7 +64,7 @@ var gMapClickController = function(map, overlay, latlng, activeLayersStore, filt
         else if (overlay.typeName == "wml:monthly_climate_summary" || 
         		overlay.typeName == "wml:daily_climate_summary" ||
         		overlay.typeName == "wml:extreme") {
-            new BomMarker(overlay.title, overlay, overlay.description, filterParameters).markerClicked()();
+            new BomMarker(overlay.title, overlay, overlay.description, filterParameters).markerClicked();
         }
         else if (overlay.description != null) {
         	overlay.openInfoWindowHtml(overlay.description, {maxWidth:800, maxHeight:600, autoScroll:true});
