@@ -270,7 +270,7 @@
          <name><xsl:value-of select="./wml:station"/></name>
          <description>
             <![CDATA[<table style="border-spacing:0px 6px;" border="0" cellspacing="0" width="100%">]]>
-            <![CDATA[</td></tr><tr><td width="90">Site ID</td><td>]]><xsl:value-of select="./wml:station"/>
+            <![CDATA[<tr><td width="90">Site ID</td><td>]]><xsl:value-of select="./wml:station"/>
             <![CDATA[</td></tr><tr><td>Site Name</td><td>]]><xsl:value-of select="./wml:station_name"/>  
             <![CDATA[</td></tr><tr><td>Commenced</td><td>]]> 
             <![CDATA[</td></tr></table>]]>

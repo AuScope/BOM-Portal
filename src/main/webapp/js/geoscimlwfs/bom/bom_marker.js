@@ -55,7 +55,7 @@ function BomMarker_markerClicked()
   oMarker.openInfoWindowHtml('<div > <img src="js/external/extjs/resources/images/default/grid/loading.gif"> Loading... </div>');
     
   /**
-  * The popup for updateCSWRecords marker contains two tabs - Summary and WFS URL
+  * The popup for BOM marker contains two tabs - Summary and WFS URL
   * Summary contains Site ID, Site Name and Commenced Date
   * WFS URL contains a URL pointing to the WFS request for the selected filter criteria with 
   * the addition of the station id of the site selected.
