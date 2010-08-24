@@ -145,7 +145,7 @@ BomMonthlySummaryFilterForm = function(id) {
                       items:[{
                     	  xtype      : 'numberfield',
                           fieldLabel : 'Rainfall',
-                          name       : 'wml:rainfall',
+                          name       : 'wml:precipitation',
                           id		 : 'monRainfall',
                           submitValue: false
                       }]

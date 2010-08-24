@@ -142,7 +142,7 @@ var now = new Date();
                       items:[{
                     	  xtype      : 'numberfield',
                           fieldLabel : 'Rainfall',
-                          name       : 'wml:rainfall',
+                          name       : 'wml:precipitation',
                           id		 : 'dayRainfall',
                           submitValue: false
                       }]
