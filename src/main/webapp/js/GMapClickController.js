@@ -66,6 +66,9 @@ var gMapClickController = function(map, overlay, latlng, activeLayersStore, filt
         		overlay.typeName == "wml:extreme") {
             new BomMarker(overlay.title, overlay, overlay.description, filterParameters).markerClicked();
         }
+        else if (overlay.typeName == "wml:high_quality_data_network_view") {
+        	new BomHighQualityMarker(overlay.title, overlay, overlay.description, filterParameters).markerClicked();
+        }
         else if (overlay.description != null) {
         	overlay.openInfoWindowHtml(overlay.description, {maxWidth:800, maxHeight:600, autoScroll:true});
         }

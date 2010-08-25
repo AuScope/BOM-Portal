@@ -24,6 +24,7 @@
                 <ref bean="knownTypeBomMonthly" />
                 <ref bean="knownTypeBomDaily" />
                 <ref bean="knownTypeBomExtreme" />
+                <ref bean="knownTypeBomHighQuality" />
             </list>
         </constructor-arg>
     </bean>
@@ -66,5 +67,12 @@
        <constructor-arg index="2" value=""/>
        <constructor-arg index="3" value="doBomClimateSummaryFilter.do"/>
        <constructor-arg index="4" value="http://maps.google.com/mapfiles/kml/paddle/red-blank.png"/>
+   </bean>   
+   <bean id="knownTypeBomHighQuality" class="org.auscope.portal.server.web.KnownFeatureTypeDefinition">
+       <constructor-arg index="0" value="wml:high_quality_data_network_view"/>
+       <constructor-arg index="1" value="High Quality Data"/>
+       <constructor-arg index="2" value=""/>
+       <constructor-arg index="3" value="doBomHighQualityDataFilter.do"/>
+       <constructor-arg index="4" value="http://maps.google.com/mapfiles/kml/paddle/ltblu-blank.png"/>
    </bean>   
 </beans>

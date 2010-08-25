@@ -13,6 +13,7 @@ import org.apache.commons.httpclient.ConnectTimeoutException;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.auscope.portal.server.util.GmlToKml;
+import org.auscope.portal.server.util.PortalPropertyPlaceholderConfigurer;
 import org.auscope.portal.server.web.ErrorMessages;
 import org.auscope.portal.server.web.service.BomSummaryService;
 import org.auscope.portal.server.web.view.JSONModelAndView;
@@ -31,6 +32,7 @@ import org.springframework.web.servlet.ModelAndView;
  * <li>monthly_climate_summary</li>
  * <li>daily_climate_summary</li>
  * <li>extreme</li>
+ * <li>high_quality_data_network_view</li>
  * </ul>
  * </p>
  * 
@@ -49,16 +51,19 @@ public class BomFilterController {
     
     private BomSummaryService bomSummaryService;
     private GmlToKml gmlToKml;
+    private PortalPropertyPlaceholderConfigurer hostConfigurer;
 
     // ----------------------------------------------------------- Constructors
     
     @Autowired
     public BomFilterController
         ( BomSummaryService bomSummaryService,
-          GmlToKml gmlToKml) {
+          GmlToKml gmlToKml,
+          PortalPropertyPlaceholderConfigurer hostConfigurer) {
         
         this.bomSummaryService = bomSummaryService;
         this.gmlToKml = gmlToKml;
+        this.hostConfigurer = hostConfigurer;
     }
 
     // ------------------------------------------- Property Setters and Getters   
@@ -68,14 +73,7 @@ public class BomFilterController {
      * 
      * @param featureType the feature type we are querying
      * @param serviceUrl the url of the service to query
-     * @param stationId the id of the station to query for
-     * @param maxTemp the max temperature to query for
-     * @param minTemp the min temperature to query for
-     * @param rainfall the rainfall amount to query for
-     * @param airPressure the air pressure amount to query for
-     * @param windSpeed the wind speed to query for
-     * @param startDate the start date range to query for
-     * @param endDate the end date range to query for
+     * @param cql the cql filter to apply to the query
      * @param request the HTTP client request
      * @return a WFS response converted into KML
      */
@@ -89,7 +87,6 @@ public class BomFilterController {
         try {
             String gmlBlob;
 
-            System.out.println("cql: " + cql);
             gmlBlob = this.bomSummaryService.getClimateSummaryGML(featureType, serviceUrl, cql);
             String kmlBlob =  convertToKml(gmlBlob, request, serviceUrl);
             //log.debug(kmlBlob);
@@ -100,6 +97,70 @@ public class BomFilterController {
             	return makeModelAndViewFailure(ErrorMessages.OPERATION_FAILED);
             } else {
             	return makeModelAndViewKML(kmlBlob, gmlBlob);
+            }
+        } catch (Exception e) {
+            return this.handleExceptionResponse(e);
+        }
+    }
+    
+    /**
+     * Handles the BOM Climate Summary filter queries.
+     * 
+     * @param featureType the feature type we are querying
+     * @param serviceUrl the url of the service to query
+     * @param data the data type value to query on
+     * @param period the period value to query on
+     * @param request the HTTP client request
+     * @return a WFS response converted into KML
+     */
+    @RequestMapping("/doBomHighQualityDataFilter.do")
+    public ModelAndView doBomHighQualityDataFilter(
+    		@RequestParam("typeName") String featureType,
+            @RequestParam("serviceUrl") String serviceUrl,
+    		@RequestParam("data") String data,
+    		@RequestParam("period") String period,
+            HttpServletRequest request) {
+
+        try {
+            String gmlBlob;
+            StringBuffer cql = new StringBuffer();
+            String birtDataType = "0";
+            String birtPeriod = "0";
+            
+            // we will need to construct 2 urls: 1 for the WFS request and another for a BIRT report.
+            // data and period are in the format wfsType|birtType as the mappings for each are different.
+            // we need to split these into individual parameters.
+            if (data != null) {
+	            String[] dataArray = data.split("\\|");
+	            cql.append("measurement_type=" + dataArray[0] + " AND ");
+	            birtDataType = dataArray[1];
+            }
+            if (period != null) {
+            	String[] periodArray = period.split("\\|");
+                cql.append(periodArray[0] + "='Y'");
+                birtPeriod = periodArray[1];
+            }
+            else {
+            	// remove the trailing AND
+            	cql.delete(cql.length()-3, cql.length());
+            }
+            
+            gmlBlob = this.bomSummaryService.getClimateSummaryGML(featureType, serviceUrl, cql.toString());
+            String kmlBlob =  convertToKml(gmlBlob, request, serviceUrl);
+            //log.debug(kmlBlob);
+            
+            //This failure test should be made a little bit more robust
+            //And should probably try to extract an error message
+            if (kmlBlob == null || kmlBlob.length() == 0) {
+            	return makeModelAndViewFailure(ErrorMessages.OPERATION_FAILED);
+            } else {
+            	ModelAndView mav = makeModelAndViewKML(kmlBlob, gmlBlob);
+            	
+            	// add birt viewer url and parameters to the model and view object
+            	mav.addObject("birtViewerUrl", hostConfigurer.resolvePlaceholder("HOST.birtviewer.url"));
+            	mav.addObject("birtMType", birtDataType);
+            	mav.addObject("birtPType", birtPeriod);
+            	return mav;
             }
         } catch (Exception e) {
             return this.handleExceptionResponse(e);

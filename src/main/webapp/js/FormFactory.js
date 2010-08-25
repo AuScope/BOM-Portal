@@ -9,6 +9,7 @@ FormFactory.prototype.getFilterForm = function(record, map) {
             case 'wml:monthly_climate_summary': return new BomMonthlySummaryFilterForm(record.get('id')); break;
             case 'wml:daily_climate_summary': return new BomDailySummaryFilterForm(record.get('id')); break;
             case 'wml:extreme': return new BomExtremeFilterForm(record.get('id')); break;
+            case 'wml:high_quality_data_network_view': return new BomHighQualityDataFilterForm(record.get('id')); break;
             default: return null; break;
         }
     }

@@ -264,7 +264,8 @@
    <!-- ================================================================= -->
    <xsl:template match="gml:featureMember/wml:monthly_climate_summary | gml:featureMembers/wml:monthly_climate_summary |
         gml:featureMember/wml:daily_climate_summary | gml:featureMembers/wml:daily_climate_summary |
-        gml:featureMember/wml:extreme | gml:featureMembers/wml:extreme" priority="100">
+        gml:featureMember/wml:extreme | gml:featureMembers/wml:extreme | 
+        gml:featureMember/wml:high_quality_data_network_view | gml:featureMembers/wml:high_quality_data_network_view" priority="100">
    
       <Placemark>
          <name><xsl:value-of select="./wml:station"/></name>
