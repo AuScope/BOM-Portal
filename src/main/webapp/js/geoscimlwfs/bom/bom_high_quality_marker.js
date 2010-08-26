@@ -13,11 +13,10 @@
 * @return A new {@link BomHighQualityMarker}
 */
 
-function BomHighQualityMarker (stationId, marker, description, filterParameters) {
+function BomHighQualityMarker (stationId, marker, description) {
     this.stationId = marker.title;
     this.moMarker = marker;
-    this.msSummaryHtml = description;
-    this.filter = filterParameters;
+    this.msSummaryHtml = description;    
 }
 
 /**
@@ -49,8 +48,7 @@ function BomHighQualityMarker_markerClicked()
 {
   var sId = this.stationId;
   var oMarker = this.moMarker;
-  var oCql = this.filter;
-
+  
   //show loading status
   oMarker.openInfoWindowHtml('<div > <img src="js/external/extjs/resources/images/default/grid/loading.gif"> Loading... </div>');
     

@@ -13,11 +13,10 @@
 * @return A new {@link BomMarker}
 */
 
-function BomMarker (stationId, marker, description, filterParameters) {
+function BomMarker (stationId, marker, description) {
     this.stationId = marker.title;
     this.moMarker = marker;
     this.msSummaryHtml = description;
-    this.filter = filterParameters;
 }
 
 /**
@@ -49,7 +48,7 @@ function BomMarker_markerClicked()
 {
   var sId = this.stationId;
   var oMarker = this.moMarker;
-  var oCql = this.filter;
+  var oCql = oMarker.filterParameters;
 
   //show loading status
   oMarker.openInfoWindowHtml('<div > <img src="js/external/extjs/resources/images/default/grid/loading.gif"> Loading... </div>');

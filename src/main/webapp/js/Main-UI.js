@@ -433,6 +433,7 @@ Ext.onReady(function() {
                         marker.birtViewerUrl = jsonResponse.birtViewerUrl;
                         marker.birtMType = jsonResponse.birtMType;
                         marker.birtPType = jsonResponse.birtPType;
+                        marker.filterParameters = filterParameters;
                     });
                     
                     var markers = parser.markers;
@@ -964,7 +965,7 @@ Ext.onReady(function() {
 
     //when updateCSWRecords person clicks on updateCSWRecords marker then do something
     GEvent.addListener(map, "click", function(overlay, latlng) {
-        gMapClickController(map, overlay, latlng, activeLayersStore, filterParameters);
+        gMapClickController(map, overlay, latlng, activeLayersStore);
     });
 
     GEvent.addListener(map, "mousemove", function(latlng){
