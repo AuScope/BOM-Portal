@@ -45,8 +45,8 @@ var now = new Date();
     });
 	
 	// ---------- combo boxes
-	var dataCombo = buildCombo('Data', dataTypeStore, 'dataType', 'Select', 160, 'data', dataTypes[0]);
-	var periodCombo = buildCombo('Period', periodTypeStore, 'periodType', 'Select', 160, 'period', periodTypes[0]);
+	var dataCombo = buildHQCombo('Data', dataTypeStore, 'dataType', 'Select', 160, 'data', dataTypes[0]);
+	var periodCombo = buildHQCombo('Period', periodTypeStore, 'periodType', 'Select', 160, 'period', periodTypes[0]);
 	
 	// ----------- main panel
     Ext.FormPanel.call(this, {
@@ -84,7 +84,7 @@ var now = new Date();
     });
 };
 
-function buildCombo(label, store, id, emptyText, width, hiddenName, defaultValues) {
+function buildHQCombo(label, store, id, emptyText, width, hiddenName, defaultValues) {
 	var combo = new Ext.form.ComboBox({  
 		tpl: '<tpl for="."><div ext:qtip="{type}" class="x-combo-list-item">{type}</div></tpl>',
 		hiddenName     : hiddenName,
