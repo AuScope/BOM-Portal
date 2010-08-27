@@ -19,7 +19,7 @@ var now = new Date();
          ['Pan Evaporation','2|2'],
          ['Cloud Daytime','3|5'],
          ['9am Cloud','3|4'],
-         ['3pm Cloud','3|3'],
+         ['3pm Cloud','3|3']
     ];
 	
 	// period type selection values
@@ -30,7 +30,7 @@ var now = new Date();
           ['Winter','win|4'],
           ['Spring','spr|5'],
           ['Monthly','mon|2'],
-          ['Daily','day|7'],
+          ['Daily','day|7']
      ];
 	
 	// ---------- stores
