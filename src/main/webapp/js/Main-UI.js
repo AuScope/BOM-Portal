@@ -326,7 +326,7 @@ Ext.onReady(function() {
             //Create our filter panel or use the existing one
             if (record.filterPanel == null) {
                 record.filterPanel = formFactory.getFilterForm(record, map);
-                setFormPanel(record.filterPanel);
+                //setFormPanel(record.filterPanel);
             } else if (forceApplyFilter && !filterButton.disabled) {
                 filterButton.handler(); //If we are using an existing one, we may need to retrigger it's filter
             }
@@ -495,6 +495,7 @@ Ext.onReady(function() {
         } else if (record.filterPanel != null) {
             //if filter panel already exists then show it
             filterPanel.getLayout().setActiveItem(record.get('id'));
+            setFormPanel(record.filterPanel);
 
             if (record.get('serviceType') == 'wfs') {
                 filterButton.enable();
