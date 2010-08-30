@@ -43,6 +43,8 @@ var now = new Date();
 	var opMinWindSpeed = buildCombo('', compOpTypeStore, 'xOpMinWindSpeed', '=', 35);
 	var opMaxWindDirection = buildCombo('', compOpTypeStore, 'xOpMaxWindDirection', '=', 35);
 	var opMinWindDirection = buildCombo('', compOpTypeStore, 'xOpMinWindDirection', '=', 35);
+	var opMaxMonthlyRainfall = buildCombo('', compOpTypeStore, 'xOpMaxMonthlyRainfall', '=', 35);
+	var opMaxDailyRainfall = buildCombo('', compOpTypeStore, 'xOpMaxDailyRainfall', '=', 35);
 	
 	var cqlField = new Ext.form.TextArea({  
         fieldLabel : 'CQL',
@@ -107,7 +109,7 @@ var now = new Date();
                       bodyStyle:'margin:0 3px 0 0',
                       items:[{
                     	  xtype      : 'numberfield',
-                          fieldLabel : 'Highest Temp',
+                          fieldLabel : 'Max Temp',
                           name       : 'wml:max_temp',
                           id		 : 'xMaxTemp',
                           submitValue: false
@@ -129,7 +131,7 @@ var now = new Date();
                       bodyStyle:'margin:0 3px 0 0',
                       items:[{
                     	  xtype      : 'numberfield',
-                          fieldLabel : 'Lowest Temp',
+                          fieldLabel : 'Min Temp',
                           name       : 'wml:min_temp',
                           id		 : 'xMinTemp',
                           submitValue: false
@@ -271,6 +273,50 @@ var now = new Date();
                       width: 40,
                       border: false,
                       items:[opMinWindDirection]
+                  }]
+              },{
+  				  // column layout with 2 columns
+                  layout:'column',
+                  border: false,	
+                  items:[{
+                      // left column
+                      border: false,
+                      layout:'form',
+                      bodyStyle:'margin:0 3px 0 0',
+                      items:[{
+                    	  xtype      : 'numberfield',
+                          fieldLabel : 'Max Monthly Rainfall',
+                          name       : 'wml:ttl_mo_prcp',
+                          id		 : 'xMaxMonthlyRainfall',
+                          submitValue: false
+                      }]
+                  },{
+                      // right column
+                      width: 40,
+                      border: false,
+                      items:[opMaxMonthlyRainfall]
+                  }]
+              },{
+  				  // column layout with 2 columns
+                  layout:'column',
+                  border: false,	
+                  items:[{
+                      // left column
+                      border: false,
+                      layout:'form',
+                      bodyStyle:'margin:0 3px 0 0',
+                      items:[{
+                    	  xtype      : 'numberfield',
+                          fieldLabel : 'Max Daily Rainfall',
+                          name       : 'wml:ttl_day_prcp',
+                          id		 : 'xMaxDailyRainfall',
+                          submitValue: false
+                      }]
+                  },{
+                      // right column
+                      width: 40,
+                      border: false,
+                      items:[opMaxDailyRainfall]
                   }]
               },{
             	  layout	:'form',

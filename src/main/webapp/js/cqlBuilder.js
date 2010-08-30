@@ -114,6 +114,10 @@ function extremeChangeHandler()
 	var opMaxWindDirection = formPanel.findById("xOpMaxWindDirection");
 	var minWindDirection = formPanel.findById("xMinWindDirection");	
 	var opMinWindDirection = formPanel.findById("xOpMinWindDirection");
+	var maxMonthlyRainfall = formPanel.findById("xMaxMonthlyRainfall");	
+	var opMaxMonthlyRainfall = formPanel.findById("xOpMaxMonthlyRainfall");
+	var maxDailyRainfall = formPanel.findById("xMaxDailyRainfall");	
+	var opMaxDailyRainfall = formPanel.findById("xOpMaxDailyRainfall");
 	var opLogic = formPanel.findById("xOpLogic");
 	var opLogicString = opLogic.getValue();
 	var cql = formPanel.findById("xCql");
@@ -129,6 +133,8 @@ function extremeChangeHandler()
 	appendNumberFieldCql(minWindSpeed, opMinWindSpeed, opLogicString);
 	appendNumberFieldCql(maxWindDirection, opMaxWindDirection, opLogicString);
 	appendNumberFieldCql(minWindDirection, opMinWindDirection, opLogicString);
+	appendNumberFieldCql(maxMonthlyRainfall, opMaxMonthlyRainfall, opLogicString);
+	appendNumberFieldCql(maxDailyRainfall, opMaxDailyRainfall, opLogicString);
 	
 	trimCql(opLogicString);
 	
