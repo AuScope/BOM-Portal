@@ -19,8 +19,8 @@ function dailySummaryChangeHandler()
 	var opTemp = formPanel.findById("dayOpTemp");
 	var rainfall = formPanel.findById("dayRainfall");
 	var opRainfall = formPanel.findById("dayOpRainfall");
-	var airPressure = formPanel.findById("dayAirPressure");
-	var opAirPressure = formPanel.findById("dayOpAirPressure");
+	//var airPressure = formPanel.findById("dayAirPressure");
+	//var opAirPressure = formPanel.findById("dayOpAirPressure");
 	var windSpeed = formPanel.findById("dayWindSpeed");
 	var opWindSpeed = formPanel.findById("dayOpWindSpeed");
 	var windDirection = formPanel.findById("dayWindDirection");
@@ -41,7 +41,7 @@ function dailySummaryChangeHandler()
 	}
 	
 	appendNumberFieldCql(rainfall, opRainfall, opLogicString);
-	appendNumberFieldCql(airPressure, opAirPressure, opLogicString);
+	//appendNumberFieldCql(airPressure, opAirPressure, opLogicString);
 	appendNumberFieldCql(windSpeed, opWindSpeed, opLogicString);
 	appendNumberFieldCql(windDirection, opWindDirection, opLogicString);
 	appendDateRangeCql(startDate, endDate);

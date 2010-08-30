@@ -50,7 +50,7 @@ var now = new Date();
 	var opStation = buildCombo('', compOpTypeStore, 'dayOpStation', '=', 35);
 	var opTemp = buildCombo('', compOpTypeStore, 'dayOpTemp', '=', 35);
 	var opRainfall = buildCombo('', compOpTypeStore, 'dayOpRainfall', '=', 35);
-	var opAirPressure = buildCombo('', compOpTypeStore, 'dayOpAirPressure', '=', 35);
+	//var opAirPressure = buildCombo('', compOpTypeStore, 'dayOpAirPressure', '=', 35);
 	var opWindSpeed = buildCombo('', compOpTypeStore, 'dayOpWindSpeed', '=', 35);
 	var opWindDirection = buildCombo('', compOpTypeStore, 'dayOpWindDirection', '=', 35);
 	
@@ -152,7 +152,7 @@ var now = new Date();
                       border: false,
                       items:[opRainfall]
                   }]
-              },{
+              },/*{
   				  // column layout with 2 columns
                   layout:'column',
                   border: false,	
@@ -174,7 +174,7 @@ var now = new Date();
                       border: false,
                       items:[opAirPressure]
                   }]
-              },{
+              },*/{
   				  // column layout with 2 columns
                   layout:'column',
                   border: false,	
