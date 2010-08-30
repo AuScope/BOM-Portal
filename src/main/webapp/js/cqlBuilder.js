@@ -173,7 +173,7 @@ function appendDateRangeCql(startDate, endDate){
 function trimCql(logicalOp){
 	var opLength = logicalOp.length;
 	
-	if(cqlString.substr(-opLength) === logicalOp) {
+	if(cqlString.substr(cqlString.length - opLength) === logicalOp) {
 		cqlString = cqlString.substring(0, cqlString.length - opLength);
 	}
 }
