@@ -319,7 +319,6 @@
                     <artifactId>jmxri</artifactId>
                 </exclusion>
             </exclusions>
-            <scope>runtime</scope>
         </dependency>
         <dependency>
             <groupId>net.jsunit</groupId>
