@@ -53,14 +53,14 @@ function BomHighQualityMarker_markerClicked()
   oMarker.openInfoWindowHtml('<div > <img src="js/external/extjs/resources/images/default/grid/loading.gif"> Loading... </div>');
     
   /**
-  * The popup for BOM high quality data marker contains two tabs - Summary and BIRT URL
+  * The popup for BOM high quality data marker contains two tabs - Summary and Climate Report URL
   * Summary contains Site ID, Site Name and Commenced Date
-  * BIRT URL contains a URL pointing to the BIRT reporting tool for the selected filter criteria for the site selected.
+  * Climate Report URL contains a URL pointing to the Cliamet Report tool for the selected filter criteria for the site selected.
   */
   var label1 = 'Summary';
-  var label2 = 'BIRT URL';
-  var normalUrl = oMarker.birtViewerUrl + "HighQualityData.rptdesign&m_type="+oMarker.birtMType+"&p_type="+oMarker.birtPType+"&a_type=0&stn_num="+sId;
-  var anomalyUrl = oMarker.birtViewerUrl + "HighQualityData.rptdesign&m_type="+oMarker.birtMType+"&p_type="+oMarker.birtPType+"&a_type=1&stn_num="+sId;
+  var label2 = 'Report URL';
+  var normalUrl = oMarker.climateReportUrl + "HighQualityData.rptdesign&m_type="+oMarker.climateReportMType+"&p_type="+oMarker.climateReportPType+"&a_type=0&stn_num="+sId;
+  var anomalyUrl = oMarker.climateReportUrl + "HighQualityData.rptdesign&m_type="+oMarker.climateReportMType+"&p_type="+oMarker.climateReportPType+"&a_type=1&stn_num="+sId;
   var urlHtml = '<a target="_blank" href="' + normalUrl + '">Normal</a> <br/> <a target="_blank" href="' + anomalyUrl + '">Anomaly</a>';
   
   // Open the popup window for the marker with the tabs Main and Data

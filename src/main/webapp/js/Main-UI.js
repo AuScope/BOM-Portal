@@ -430,9 +430,9 @@ Ext.onReady(function() {
                         marker.typeName = selectedRecord.get('typeName');
                         marker.wfsUrl = serviceUrl;
                         marker.parentRecord = selectedRecord;
-                        marker.birtViewerUrl = jsonResponse.birtViewerUrl;
-                        marker.birtMType = jsonResponse.birtMType;
-                        marker.birtPType = jsonResponse.birtPType;
+                        marker.climateReportUrl = jsonResponse.climateReportUrl;
+                        marker.climateReportMType = jsonResponse.climateReportMType;
+                        marker.climateReportPType = jsonResponse.climateReportPType;
                         marker.filterParameters = filterParameters;
                     });
                     

@@ -124,21 +124,21 @@ public class BomFilterController {
         try {
             String gmlBlob;
             StringBuffer cql = new StringBuffer();
-            String birtDataType = "0";
-            String birtPeriod = "0";
+            String climateReportDataType = "0";
+            String climateReportPeriod = "0";
             
-            // we will need to construct 2 urls: 1 for the WFS request and another for a BIRT report.
-            // data and period are in the format wfsType|birtType as the mappings for each are different.
+            // we will need to construct 2 urls: 1 for the WFS request and another for a Climate report.
+            // data and period are in the format wfsType|climateReportType as the mappings for each are different.
             // we need to split these into individual parameters.
             if (data != null) {
 	            String[] dataArray = data.split("\\|");
 	            cql.append("measurement_type=" + dataArray[0] + " AND ");
-	            birtDataType = dataArray[1];
+	            climateReportDataType = dataArray[1];
             }
             if (period != null) {
             	String[] periodArray = period.split("\\|");
                 cql.append(periodArray[0] + "='Y'");
-                birtPeriod = periodArray[1];
+                climateReportPeriod = periodArray[1];
             }
             else {
             	// remove the trailing AND
@@ -156,10 +156,10 @@ public class BomFilterController {
             } else {
             	ModelAndView mav = makeModelAndViewKML(kmlBlob, gmlBlob);
             	
-            	// add birt viewer url and parameters to the model and view object
-            	mav.addObject("birtViewerUrl", hostConfigurer.resolvePlaceholder("HOST.birtviewer.url"));
-            	mav.addObject("birtMType", birtDataType);
-            	mav.addObject("birtPType", birtPeriod);
+            	// add climateReport url and parameters to the model and view object
+            	mav.addObject("climateReportUrl", hostConfigurer.resolvePlaceholder("HOST.climatereport.url"));
+            	mav.addObject("climateReportMType", climateReportDataType);
+            	mav.addObject("climateReportPType", climateReportPeriod);
             	return mav;
             }
         } catch (Exception e) {
