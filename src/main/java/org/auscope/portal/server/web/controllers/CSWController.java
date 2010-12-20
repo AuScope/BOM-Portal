@@ -153,6 +153,11 @@ public class CSWController {
         tableRow.add(knownType.getIconUrl());
 
         tableRow.add("<a href='http://portal.auscope.org' id='mylink' target='_blank'><img src='img/page_code.png'></a>");
+      
+        //TODO: Currently we only get constraints from the first CSW record in the collection.
+        // If required in the future this may be changed to get from all records or
+        // just add a generic constraint for the layer if any record has a constraint.
+        tableRow.add(records[0].getConstraints());
         
         return tableRow;
     }
@@ -164,8 +169,8 @@ public class CSWController {
      * Returns a JSON response with a data structure like so
      *
      * [
-     * [title, description, proxyURL, serviceType, id, typeName, [serviceURLs], checked, statusImage, markerIconHtml, markerIconUrl, dataSourceImage],
-     * [title, description, proxyURL, serviceType, id, typeName, [serviceURLs], checked, statusImage, markerIconHtml, markerIconUrl, dataSourceImage]
+     * [title, description, proxyURL, serviceType, id, typeName, [serviceURLs], checked, statusImage, markerIconHtml, markerIconUrl, dataSourceImage, constraints],
+     * [title, description, proxyURL, serviceType, id, typeName, [serviceURLs], checked, statusImage, markerIconHtml, markerIconUrl, dataSourceImage, constraints]
      * ]
      *
      * @return
@@ -200,8 +205,8 @@ public class CSWController {
      * Returns a JSON response with a data structure like so
      *
      * [
-     * [title, description, proxyURL, serviceType, id, typeName, [serviceURLs], checked, statusImage, markerIconHtml, markerIconUrl, dataSourceImage],
-     * [title, description, proxyURL, serviceType, id, typeName, [serviceURLs], checked, statusImage, markerIconHtml, markerIconUrl, dataSourceImage]
+     * [title, description, proxyURL, serviceType, id, typeName, [serviceURLs], checked, statusImage, markerIconHtml, markerIconUrl, dataSourceImage, constraints],
+     * [title, description, proxyURL, serviceType, id, typeName, [serviceURLs], checked, statusImage, markerIconHtml, markerIconUrl, dataSourceImage, constraints]
      * ]
      *
      * @return
@@ -278,8 +283,8 @@ public class CSWController {
      * Returns a JSON response with a data structure like so
      *
      * [
-     * [title, description, contactOrganisation, proxyURL, serviceType, id, typeName, [serviceURLs], checked, statusImage, markerIconHtml, markerIconUrl, dataSourceImage, opacity],
-     * [title, description, contactOrganisation, proxyURL, serviceType, id, typeName, [serviceURLs], checked, statusImage, markerIconHtml, markerIconUrl, dataSourceImage, opacity]
+     * [title, description, contactOrganisation, proxyURL, serviceType, id, typeName, [serviceURLs], checked, statusImage, markerIconHtml, markerIconUrl, dataSourceImage, constraints, opacity],
+     * [title, description, contactOrganisation, proxyURL, serviceType, id, typeName, [serviceURLs], checked, statusImage, markerIconHtml, markerIconUrl, dataSourceImage, constraints, opacity]
      * ]
      *
      * @return
@@ -332,9 +337,13 @@ public class CSWController {
             tableRow.add(serviceURLs);
 
             tableRow.element(true);
+
             tableRow.add("<img src='js/external/extjs/resources/images/default/grid/done.gif'>");
 
             tableRow.add("<a href='http://portal.auscope.org' id='mylink' target='_blank'><img src='img/picture_link.png'></a>");
+            
+            tableRow.add(record.getConstraints());
+            
             tableRow.add("1.0");
 
             dataItems.add(tableRow);

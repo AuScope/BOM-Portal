@@ -26,7 +26,8 @@ Ext.onReady(function() {
             {   name: 'loadingStatus'   },
             {   name: 'iconImgSrc'      },
             {   name: 'iconUrl'         },
-            {   name: 'dataSourceImage' }
+            {   name: 'dataSourceImage' },
+            {   name: 'constraints'     }
         ]),
         sortInfo: {field:'title', direction:'ASC'}
     });
@@ -47,6 +48,7 @@ Ext.onReady(function() {
             {   name: 'iconImgSrc'      },
             {   name: 'iconUrl'         },
             {   name: 'dataSourceImage' },
+            {   name: 'constraints'     }
         ]),
         sortInfo: {field:'title', direction:'ASC'}
     });
@@ -99,6 +101,8 @@ Ext.onReady(function() {
                     
                     //invoke this layer as being checked
                     activeLayerCheckHandler(complexFeaturesPanel.getSelectionModel().getSelected(), true);
+
+                    showCopyrightInfo(recordToAdd);
                 }
                 
                 //set this record to selected
@@ -134,6 +138,8 @@ Ext.onReady(function() {
                     //invoke this layer as being checked
                     activeLayerCheckHandler(genericFeaturesPanel.getSelectionModel().getSelected(), true);
 
+                    showCopyrightInfo(recordToAdd);
+                    
                     //set this record to selected
                     activeLayersPanel.getSelectionModel().selectRecords([recordToAdd], false);
                 }
@@ -159,7 +165,7 @@ Ext.onReady(function() {
         reader: new Ext.data.ArrayReader({}, [
             {   name: 'title'           },
             {   name: 'description'     },
-            {   name: 'contactOrg'     },
+            {   name: 'contactOrg'      },
             {   name: 'proxyURL'        },
             {   name: 'serviceType'     },
             {   name: 'id'              },
@@ -168,6 +174,7 @@ Ext.onReady(function() {
             {   name: 'layerVisible'    },
             {   name: 'loadingStatus'   },
             {   name: 'dataSourceImage' },
+            {   name: 'constraints'     },
             {   name: 'opacity'         }
         ]),
         groupField:'contactOrg',
@@ -220,6 +227,8 @@ Ext.onReady(function() {
                     
                     //invoke this layer as being checked
                     activeLayerCheckHandler(wmsLayersPanel.getSelectionModel().getSelected(), true);
+                    
+                    showCopyrightInfo(recordToAdd);
                 }
 
                 //set this record to selected
@@ -233,7 +242,43 @@ Ext.onReady(function() {
         })
 
     });
+    
+    //Display any copyright information associated with the layer.
+    var showCopyrightInfo = function(record) {
+    	var html = "";
+		var constraints = record.get('constraints');
+		
+		if(constraints.length > 0) {
+			html += "<table cellspacing='10' cellpadding='0' border='0'>";
+			for(var i=0; i<constraints.length; i++) {
+				if(/^http:\/\//.test(constraints[i])) {
+					html += "<tr><td><a href="+constraints[i]+" target='_blank'>" + constraints[i] + "</a></td></tr>";
+				} else {
+					html += "<tr><td>" + constraints[i] + "</td></tr>";
+				}
+			}
+			html += "</table>";
+		} 
 
+		if(html != "") {
+			win = new Ext.Window({
+				title		: 'Copyright Information',
+			    layout		: 'fit',
+			    width		: 500,
+			    autoHeight:    true,   			
+			    items: [{
+			    	xtype 	: 'panel',
+			    	html	: html,
+			    	bodyStyle   : 'padding:0px',
+			    	autoScroll	: true,
+			        autoDestroy : true
+			    }]
+			});
+		    			
+			win.show(this);   
+		}  	
+    };
+    
     var filterButton = new Ext.Button({
         text     :'Apply Filter >>',
         tooltip  :'Apply Filter',
@@ -279,7 +324,8 @@ Ext.onReady(function() {
             {   name: 'loadingStatus'   },
             {   name: 'iconImgSrc'      },
             {   name: 'iconUrl'         },
-            {   name: 'dataSourceImage' }
+            {   name: 'dataSourceImage' },
+            {   name: 'constraints'     }
         ])
     });
 

@@ -1,6 +1,11 @@
 package org.auscope.portal.csw;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+
 import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathFactory;
@@ -19,10 +24,8 @@ public class CSWRecord {
     private String onlineResourceDescription;
     private String onlineResourceProtocol;
     private String contactOrganisation;
-
-
     private String dataIdentificationAbstract;
-
+    private String[] constraints;
 
     public CSWRecord(Node node) throws XPathExpressionException {
 
@@ -56,6 +59,18 @@ public class CSWRecord {
         String contactOrganisationExpression = "gmd:contact/gmd:CI_ResponsibleParty/gmd:organisationName/gco:CharacterString";
         tempNode = (Node)xPath.evaluate(contactOrganisationExpression, node, XPathConstants.NODE);
         contactOrganisation = tempNode != null ? tempNode.getTextContent() : "";
+        
+        String otherConstraintsExpression = "gmd:identificationInfo/gmd:MD_DataIdentification/gmd:resourceConstraints/gmd:MD_LegalConstraints/gmd:otherConstraints/gco:CharacterString";
+        NodeList tempNodeList = (NodeList) xPath.evaluate(otherConstraintsExpression, node, XPathConstants.NODESET);
+        if(tempNodeList != null && tempNodeList.getLength() > 0) {
+        	List<String> constraintsList = new ArrayList<String>();
+        	Node constraint;
+        	for (int j=0; j<tempNodeList.getLength(); j++) {
+            	constraint = tempNodeList.item(j);
+            	constraintsList.add(constraint.getTextContent());
+            }
+        	constraints = constraintsList.toArray(new String[constraintsList.size()]);
+        } 
     }
 
     public String getServiceName() {
@@ -86,6 +101,10 @@ public class CSWRecord {
         return dataIdentificationAbstract;
     }
     
+    public String[] getConstraints() {
+    	return constraints;
+    }
+    
     public String toString() {
         StringBuffer buf = new StringBuffer();
         buf.append(serviceName);
@@ -100,6 +119,9 @@ public class CSWRecord {
         buf.append(",");
         buf.append(dataIdentificationAbstract);
         buf.append(",");
+        if(constraints != null && constraints.length > 0) {
+        	buf.append(constraints.toString());
+        }
         return buf.toString(); 
     }
     
