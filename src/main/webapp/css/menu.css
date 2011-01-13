@@ -1,9 +1,11 @@
 #menu {
+
     overflow:hidden; /* wrap floats */
     height:40px; /* trips haslayout, wrap floats IE */
     list-style:none;
     top: 0px;
     right: 0px;
+
     /*background:url(images/articles/menu.png) 0 0 repeat-x;*/
 /*  font:bold 16px/45px sans-serif;*/
     font:bold 14px/40px sans-serif;
@@ -28,15 +30,18 @@
     text-decoration:none;
     color:#EEE;
     background:url(../img/nav.jpg) 0 0px no-repeat;
+
 }
 
 #menu a span {
+
     position:absolute;
     top:0;
     left:100%;
     width:15px;
     height:40px;
     background:url(../img/nav.jpg) -295px -0px no-repeat;
+
 }
 
 #menu .current a {

@@ -1,6 +1,6 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd"> 
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.auscope.portal</groupId>
     <artifactId>BOM-Portal</artifactId>
@@ -12,24 +12,39 @@
         <connection>scm:svn:https://svn.auscope.org/subversion/AuScopePortal/AuScope-Portal/trunk</connection>
         <developerConnection>scm:svn:https://svn.auscope.org/subversion/AuScopePortal/AuScope-Portal/trunk</developerConnection>
     </scm>
-    
+
     <!-- Build Configuration -->
+    <organization>
+    	<name>AuScope</name>
+    	<url>http://www.auscope.org</url>
+    </organization>
+
+    <!-- Project properties -->
+    <properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <jetty.version>6.1.25</jetty.version>
+        <log4j.version>1.2.16</log4j.version>
+        <spring.version>3.0.4.RELEASE</spring.version>
+        <spring.security.version>3.0.3.RELEASE</spring.security.version>
+        <geotools.version>2.6.5</geotools.version>
+    </properties>
+
     <build>
         <finalName>BOM-Portal</finalName>
         <plugins>
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
+                <version>2.3.2</version>
                 <configuration>
                     <source>1.6</source>
                     <target>1.6</target>
                     <compilerVersion>1.6</compilerVersion>
-                    <verbose>true</verbose>
                 </configuration>
             </plugin>
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>buildnumber-maven-plugin</artifactId>
-                <version>1.0-beta-2</version>
+                <version>1.0-beta-4</version>
                 <executions>
                     <execution>
                         <phase>validate</phase>
@@ -40,15 +55,22 @@
                 </executions>
                 <configuration>
                     <doCheck>false</doCheck>
-                    <doUpdate>true</doUpdate>
+                    <doUpdate>false</doUpdate>
                     <timestampFormat>{0,date,dd-MM-yyyy HH:mm}</timestampFormat>
                 </configuration>
             </plugin>
             <plugin>
+                <artifactId>maven-surefire-plugin</artifactId>
+				<version>2.6</version>
+			</plugin>
+            <plugin>
+                <artifactId>maven-resources-plugin</artifactId>
+				<version>2.4.3</version>
+			</plugin>
+            <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>
-                <!-- <version>2.1-beta-1</version> -->
-                <version>2.0.2</version>
+                <version>2.1</version>
                 <configuration>
                     <archive>
                         <manifest>
@@ -85,7 +107,7 @@
             <plugin>
                 <groupId>org.mortbay.jetty</groupId>
                 <artifactId>maven-jetty-plugin</artifactId>
-                <version>6.1.16</version>
+                <version>${jetty.version}</version>
                 <dependencies>
                     <dependency>
                         <groupId>log4j</groupId>
@@ -95,38 +117,67 @@
                 </dependencies>
                 <configuration>
                     <webApp>${project.build.directory}/${project.build.finalName}</webApp>
-                    <!--
-                    <webAppSourceDirectory>
-                       ${webdir}
-                    </webAppSourceDirectory>
-                    -->
                     <scanIntervalSeconds>9999</scanIntervalSeconds>
                     <contextPath>/</contextPath>
-                    <systemProperties>
-                        <systemProperty>
-                            <name>maven.test.skip</name>
-                            <value>true</value>
-                        </systemProperty>
-                    </systemProperties>
-                </configuration>
+				</configuration>
             </plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-eclipse-plugin</artifactId>
+				<version>2.8</version>
+				<configuration>
+					<classpathContainers>
+						<classpathContainer>org.eclipse.jdt.launching.JRE_CONTAINER</classpathContainer>
+					</classpathContainers>
+					<wtpversion>2.0</wtpversion>
+				</configuration>
+			</plugin>
+    	  	<plugin>
+        		<groupId>net.alchim31.maven</groupId>
+		        <artifactId>yuicompressor-maven-plugin</artifactId>
+		        <version>1.1</version>
+        		<configuration>
+					<excludes>
+				    	<!-- Exclude Ext JS -->
+				    	<exclude>js/external/**</exclude>
+					</excludes>
+                	<nosuffix>true</nosuffix>
+        		</configuration>
+		        <executions>
+        			<execution>
+            			<goals>
+		                    <goal>jslint</goal>
+            			</goals>
+          			</execution>
+        		</executions>
+	      	</plugin>
+	      	<plugin>
+ 				<groupId>org.zeroturnaround</groupId>
+				<artifactId>javarebel-maven-plugin</artifactId>
+				<version>1.0.5</version>
+				<executions>
+					<execution>
+      					<id>generate-rebel-xml</id>
+						<phase>process-resources</phase>
+						<goals>
+							<goal>generate</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
         </plugins>
     </build>
-    
-    <!-- Project properties -->
-    <properties>
-        <jetty.version>6.1.7</jetty.version>
-        <log4j.version>1.2.16</log4j.version>
-        <spring.version>3.0.2.RELEASE</spring.version>
-        <spring.security.version>2.0.4</spring.security.version>
-        <geotools.version>2.6.1</geotools.version>
-    </properties>
-    
+
     <repositories>
         <repository>
             <id>osgeo</id>
             <name>Open Source Geospatial Foundation Repository</name>
             <url>http://download.osgeo.org/webdav/geotools</url>
+        </repository>
+        <repository>
+        	<id>geotoolkit</id>
+        	<name>Geo Toolkit Repository</name>
+        	<url>http://maven.geotoolkit.org/</url>
         </repository>
     </repositories>
 
@@ -150,11 +201,11 @@
             <version>1.1.2</version>
         </dependency>
 
-        <!-- Spring framework -->        
+        <!-- Spring framework -->
         <!--
         Core utilities used by other modules.
         Define this if you use Spring Utility APIs
-        (org.springframework.core.*/org.springframework.util.*)        
+        (org.springframework.core.*/org.springframework.util.*)
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-core</artifactId>
@@ -172,20 +223,20 @@
             <version>${spring.version}</version>
             <scope>compile</scope>
         </dependency>
-        
+
         <!--
         Application Context (depends on spring-core, spring-expression, spring-aop, spring-beans)
         This is the central artifact for Spring's Dependency Injection Container and is generally
-        always defined 
+        always defined
         (org.springframework.stereotype.*, org.springframework.ui.*)
         -->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-context</artifactId>
             <version>${spring.version}</version>
-            <scope>compile</scope> 
+            <scope>compile</scope>
         </dependency>
-                
+
         <!--
         Web application development utilities applicable to both Servlet and Portlet Environments
         (depends on spring-core, spring-beans, spring-context)
@@ -198,7 +249,7 @@
             <version>${spring.version}</version>
             <scope>compile</scope>
         </dependency>
-        
+
         <!--
         Spring MVC for Servlet Environments (depends on spring-core, spring-beans, spring-context,
         spring-web)
@@ -211,60 +262,13 @@
             <version>${spring.version}</version>
             <scope>compile</scope>
         </dependency>
-        
-        <!--
-        Required by any application which uses Spring Security. -->
-        <dependency>
-            <groupId>org.springframework.security</groupId>
-            <artifactId>spring-security-core</artifactId>
-            <version>${spring.version}</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.springframework</groupId>
-                    <artifactId>spring-support</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.security</groupId>
-            <artifactId>spring-security-taglibs</artifactId>
-            <version>${spring.version}</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.springframework</groupId>
-                    <artifactId>spring-web</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-
-        <!-- 
-        The security namespace parsing code (and hence nothing that you are 
-        likely to use directly in your application). You need it if you are 
-        using the Spring Security XML namespace for configuration. The main 
-        package is org.springframework.security.config.Namespace parsing code -->
-        <dependency>
-            <groupId>org.springframework.security</groupId>
-            <artifactId>spring-security-config</artifactId>
-            <version>${spring.version}</version>
-        </dependency>
-                        
-        <!--
-        JDBC Data Access Library (depends on spring-core, spring-beans, spring-context, spring-tx)
-        Define this if you use Spring's JdbcTemplate API (org.springframework.jdbc.*)
-        -->
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-jdbc</artifactId>
-            <version>${spring.version}</version>
-            <scope>compile</scope>
-        </dependency>
 
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-mock</artifactId>
             <version>2.0.8</version>
         </dependency>
-                
+
         <dependency>
             <groupId>net.sf.json-lib</groupId>
             <artifactId>json-lib</artifactId>
@@ -285,7 +289,7 @@
             <groupId>net.sf.saxon</groupId>
             <artifactId>saxon-xom</artifactId>
             <version>8.7</version>
-        </dependency> 
+        </dependency>
         <dependency>
             <groupId>RestProxy</groupId>
             <artifactId>RestProxy</artifactId>
@@ -349,12 +353,12 @@
             <groupId>org.jmock</groupId>
             <artifactId>jmock-legacy</artifactId>
             <version>2.5.1</version>
-        </dependency> 
+        </dependency>
         <dependency>
             <groupId>cglib</groupId>
             <artifactId>cglib-nodep</artifactId>
             <version>2.1_3</version>
-        </dependency> 
+        </dependency>
         <dependency>
             <groupId>org.objenesis</groupId>
             <artifactId>objenesis</artifactId>
@@ -366,14 +370,33 @@
             <version>3.1</version>
         </dependency>
         <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
-            <version>5.1.6</version>
-        </dependency>
-        <dependency>
             <groupId>xom</groupId>
             <artifactId>xom</artifactId>
             <version>1.1d2</version>
+        </dependency>
+        <dependency>
+        	<groupId>org.slf4j</groupId>
+        	<artifactId>slf4j-log4j12</artifactId>
+        	<version>1.5.6</version>
+        	<optional>false</optional>
+        </dependency>
+        <dependency>
+        	<groupId>edu.ucar</groupId>
+        	<artifactId>netcdf</artifactId>
+        	<version>4.1</version>
+        	<optional>false</optional>
+        </dependency>
+        <dependency>
+        	<groupId>net.sf.saxon</groupId>
+        	<artifactId>saxon-xpath</artifactId>
+        	<version>8.7</version>
+        	<optional>false</optional>
+        </dependency>
+        <dependency>
+        	<groupId>net.sf.saxon</groupId>
+        	<artifactId>saxon-dom</artifactId>
+        	<version>8.7</version>
+        	<optional>false</optional>
         </dependency>
     </dependencies>
 </project>

@@ -1,32 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans xmlns="http://www.springframework.org/schema/beans" 
+<beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:tx="http://www.springframework.org/schema/tx"
    xsi:schemaLocation="
       http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
       http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd"
    >
-      
+
    <!-- Turn on HostPrecedingPropertyPlaceholderConfigurer -->
    <!-- http://jdwyah.blogspot.com/2006/12/updated-spring-configuration.html -->
    <bean id="propertyConfigurer" class="org.auscope.portal.server.util.PortalPropertyPlaceholderConfigurer">
       <property name="locations">
          <list>
             <value>classpath:config.properties</value>
-            <value>classpath:env.properties</value>
          </list>
       </property>
    </bean>
 
-    <bean id="knownTypes" class="java.util.ArrayList">
-        <constructor-arg>
-            <list>
-                <ref bean="knownTypeBomMonthly" />
-                <ref bean="knownTypeBomDaily" />
-                <ref bean="knownTypeBomExtreme" />
-                <ref bean="knownTypeBomHighQuality" />
-            </list>
-        </constructor-arg>
+   <bean id="connectionParams" class="org.apache.commons.httpclient.params.HttpConnectionManagerParams">
+        <property name="connectionTimeout" value="900000"/> <!--  15 minutes -->
+        <property name="soTimeout" value="900000"/> <!--  15 minutes -->
+   </bean>
+  
+    <bean id="cswBOMTest" class="org.auscope.portal.server.web.service.CSWServiceItem">
+        <constructor-arg index="0" value="http://auscope-portal-dev.arrc.csiro.au/bluenetmest/srv/en/csw"/>
+    </bean> 
+    
+    <bean id="cswAuscopeTest" class="org.auscope.portal.server.web.service.CSWServiceItem">
+		<constructor-arg index="0" value="http://auscope-portal-2.arrc.csiro.au/geonetwork/srv/en/csw"/>
+	</bean>
+    
+    <bean id="cswAuscopeDev" class="org.auscope.portal.server.web.service.CSWServiceItem">
+        <constructor-arg index="0" value="http://auscope-portal-dev.arrc.csiro.au/geonetwork/srv/en/csw"/>
     </bean>
     
     <bean id="googleMapIconUrls" class="java.util.ArrayList">
@@ -45,34 +50,124 @@
         </constructor-arg>
     </bean>
 
-   <bean id="knownTypeBomMonthly" class="org.auscope.portal.server.web.KnownFeatureTypeDefinition">
-       <constructor-arg index="0" value="wml:monthly_climate_summary"/>
-       <constructor-arg index="1" value="Monthly Climate Summary"/>
-       <constructor-arg index="2" value=""/>
-       <constructor-arg index="3" value="doBomClimateSummaryFilter.do"/>
-       <constructor-arg index="4" value="http://maps.google.com/mapfiles/kml/paddle/ylw-blank.png"/>
+   <bean id="knownTypeBomMonthly" class="org.auscope.portal.server.web.KnownLayerWFS">
+       <constructor-arg name="featureTypeName" value="wml:monthly_climate_summary"/>
+       <constructor-arg name="title" value="Monthly Climate Summary"/>
+       <constructor-arg name="description" value=""/>
+       <constructor-arg name="proxyUrl" value="doBomClimateSummaryFilter.do"/>
+       <constructor-arg name="iconUrl" value="http://maps.google.com/mapfiles/kml/paddle/ylw-blank.png"/>
+       <constructor-arg name="iconAnchor">
+           <bean class="java.awt.Point">
+               <constructor-arg index="0" value="16"/>
+               <constructor-arg index="1" value="32"/>
+           </bean>
+       </constructor-arg>
+       <constructor-arg name="infoWindowAnchor">
+           <bean class="java.awt.Point">
+               <constructor-arg index="0" value="16"/>
+               <constructor-arg index="1" value="32"/>
+           </bean>
+       </constructor-arg>
+       <constructor-arg name="iconSize">
+           <bean class="java.awt.Dimension">
+               <constructor-arg index="0" value="32"/>
+               <constructor-arg index="1" value="32"/>
+           </bean>
+       </constructor-arg>
    </bean>
    
-   <bean id="knownTypeBomDaily" class="org.auscope.portal.server.web.KnownFeatureTypeDefinition">
-       <constructor-arg index="0" value="wml:daily_climate_summary"/>
-       <constructor-arg index="1" value="Daily Climate Summary"/>
-       <constructor-arg index="2" value=""/>
-       <constructor-arg index="3" value="doBomClimateSummaryFilter.do"/>
-       <constructor-arg index="4" value="http://maps.google.com/mapfiles/kml/paddle/grn-blank.png"/>
+   <bean id="knownTypeBomDaily" class="org.auscope.portal.server.web.KnownLayerWFS">
+       <constructor-arg name="featureTypeName" value="wml:daily_climate_summary"/>
+       <constructor-arg name="title" value="Daily Climate Summary"/>
+       <constructor-arg name="description" value=""/>
+       <constructor-arg name="proxyUrl" value="doBomClimateSummaryFilter.do"/>
+       <constructor-arg name="iconUrl" value="http://maps.google.com/mapfiles/kml/paddle/grn-blank.png"/>
+       <constructor-arg name="iconAnchor">
+           <bean class="java.awt.Point">
+               <constructor-arg index="0" value="16"/>
+               <constructor-arg index="1" value="32"/>
+           </bean>
+       </constructor-arg>
+       <constructor-arg name="infoWindowAnchor">
+           <bean class="java.awt.Point">
+               <constructor-arg index="0" value="16"/>
+               <constructor-arg index="1" value="32"/>
+           </bean>
+       </constructor-arg>
+       <constructor-arg name="iconSize">
+           <bean class="java.awt.Dimension">
+               <constructor-arg index="0" value="32"/>
+               <constructor-arg index="1" value="32"/>
+           </bean>
+       </constructor-arg>
    </bean>
    
-   <bean id="knownTypeBomExtreme" class="org.auscope.portal.server.web.KnownFeatureTypeDefinition">
-       <constructor-arg index="0" value="wml:extreme"/>
-       <constructor-arg index="1" value="Extremes"/>
-       <constructor-arg index="2" value=""/>
-       <constructor-arg index="3" value="doBomClimateSummaryFilter.do"/>
-       <constructor-arg index="4" value="http://maps.google.com/mapfiles/kml/paddle/red-blank.png"/>
+   <bean id="knownTypeBomExtreme" class="org.auscope.portal.server.web.KnownLayerWFS">
+       <constructor-arg name="featureTypeName" value="wml:extreme"/>
+       <constructor-arg name="title" value="Extremes"/>
+       <constructor-arg name="description" value=""/>
+       <constructor-arg name="proxyUrl" value="doBomClimateSummaryFilter.do"/>
+       <constructor-arg name="iconUrl" value="http://maps.google.com/mapfiles/kml/paddle/red-blank.png"/>
+       <constructor-arg name="iconAnchor">
+           <bean class="java.awt.Point">
+               <constructor-arg index="0" value="16"/>
+               <constructor-arg index="1" value="32"/>
+           </bean>
+       </constructor-arg>
+       <constructor-arg name="infoWindowAnchor">
+           <bean class="java.awt.Point">
+               <constructor-arg index="0" value="16"/>
+               <constructor-arg index="1" value="32"/>
+           </bean>
+       </constructor-arg>
+       <constructor-arg name="iconSize">
+           <bean class="java.awt.Dimension">
+               <constructor-arg index="0" value="32"/>
+               <constructor-arg index="1" value="32"/>
+           </bean>
+       </constructor-arg>
    </bean>   
-   <bean id="knownTypeBomHighQuality" class="org.auscope.portal.server.web.KnownFeatureTypeDefinition">
-       <constructor-arg index="0" value="wml:high_quality_data_network_view"/>
-       <constructor-arg index="1" value="High Quality Data"/>
-       <constructor-arg index="2" value=""/>
-       <constructor-arg index="3" value="doBomHighQualityDataFilter.do"/>
-       <constructor-arg index="4" value="http://maps.google.com/mapfiles/kml/paddle/ltblu-blank.png"/>
-   </bean>   
+   <bean id="knownTypeBomHighQuality" class="org.auscope.portal.server.web.KnownLayerWFS">
+       <constructor-arg name="featureTypeName" value="wml:high_quality_data_network_view"/>
+       <constructor-arg name="title" value="High Quality Data"/>
+       <constructor-arg name="description" value=""/>
+       <constructor-arg name="proxyUrl" value="doBomHighQualityDataFilter.do"/>
+       <constructor-arg name="iconUrl" value="http://maps.google.com/mapfiles/kml/paddle/ltblu-blank.png"/>
+       <constructor-arg name="iconAnchor">
+           <bean class="java.awt.Point">
+               <constructor-arg index="0" value="16"/>
+               <constructor-arg index="1" value="32"/>
+           </bean>
+       </constructor-arg>
+       <constructor-arg name="infoWindowAnchor">
+           <bean class="java.awt.Point">
+               <constructor-arg index="0" value="16"/>
+               <constructor-arg index="1" value="32"/>
+           </bean>
+       </constructor-arg>
+       <constructor-arg name="iconSize">
+           <bean class="java.awt.Dimension">
+               <constructor-arg index="0" value="32"/>
+               <constructor-arg index="1" value="32"/>
+           </bean>
+       </constructor-arg>
+   </bean> 
+   <!--TODO: this layer is used to demonstrate coverage support in BOM portal, and should be removed afterward  -->
+   <bean id="knownTypeBouguerGeodetic" class="org.auscope.portal.server.web.KnownLayerWMS">
+       <constructor-arg name="title" value="Onshore Only Bouguer Geodetic"/>
+       <constructor-arg name="description" value=""/>
+       <constructor-arg name="layerName" value="onshore_only_Bouguer_geodetic"/>
+   </bean>
+    
+    <!-- This layer is NOT selectable, it is only used for hiding these features -->
+    <bean id="knownTypeSamplingPoint" class="org.auscope.portal.server.web.KnownLayerWFS">
+        <constructor-arg name="featureTypeName" value="sa:SamplingPoint"/>
+        <property name="hidden" value="true"/>
+    </bean>
+    <!-- This layer is NOT selectable, it is only used for hiding these features -->
+    <bean id="knownTypeFeatureCollection" class="org.auscope.portal.server.web.KnownLayerWFS">
+        <constructor-arg name="featureTypeName" value="gml:FeatureCollection"/>
+        <property name="hidden" value="true"/>
+    </bean>
+
 </beans>

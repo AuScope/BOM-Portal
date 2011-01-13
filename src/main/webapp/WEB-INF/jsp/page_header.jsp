@@ -1,4 +1,3 @@
-<%@ taglib prefix='security' uri='http://www.springframework.org/security/tags' %>
    <div id="header-container">
       <div id="logo">
          <h1>
@@ -6,8 +5,6 @@
             <!-- <a href="login.html"><img alt="" src="/img/img-auscope-banner.gif" /></a> -->
          </h1>
       </div>
-                                  
-     
       <div id="menu">
          <ul >
             <security:authorize ifAllGranted="ROLE_ADMINISTRATOR">
@@ -16,6 +13,5 @@
             <li ><a href="login.html">Login<span></span></a></li>
          </ul>
       </div>
-      
       <span id="latlng" class="input-text"></span>
    </div>

@@ -51,7 +51,7 @@ public class BomSummaryService {
         log.debug("\n" + serviceURL + "\n" + cql);
 
         //create a GetFeature request with filter constraints on a query
-        HttpMethodBase method = methodMaker.makeMethod(serviceURL, featureType, cql);
+        HttpMethodBase method = methodMaker.makeMethod(serviceURL, featureType, cql,200);
 
         //call the service, and get the summary
         return httpServiceCaller.getMethodResponseAsString(method, httpServiceCaller.getHttpClient());

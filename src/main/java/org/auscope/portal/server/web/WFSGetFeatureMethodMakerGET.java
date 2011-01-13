@@ -29,9 +29,16 @@ public class WFSGetFeatureMethodMakerGET implements IWFSGetFeatureMethodMaker {
      * @return
      * @throws Exception if service URL or featureType is not provided
      */
-    public HttpMethodBase makeMethod(String serviceURL, String featureType, String filterString) throws Exception {
+    public HttpMethodBase makeMethod(String serviceURL, String featureType, String filterString, int maxFeatures) throws Exception {
+    	return makeMethod(serviceURL, featureType, filterString, maxFeatures, null);    	
+    }
 
-    	// Make sure the required parameters are given
+	@Override
+	public HttpMethodBase makeMethod(String serviceURL, String featureType,
+			String filterString, int maxFeatures, String srsName)
+			throws Exception {	
+		
+		// Make sure the required parameters are given
         if (featureType == null || featureType.equals(""))
             throw new Exception("featureType parameter can not be null or empty.");
 
@@ -55,7 +62,7 @@ public class WFSGetFeatureMethodMakerGET implements IWFSGetFeatureMethodMaker {
         valuePairList.add(new NameValuePair("request", "GetFeature"));
         valuePairList.add(new NameValuePair("typeName", featureType));
         valuePairList.add(new NameValuePair("srsName", "EPSG:4326"));
-        //valuePairList.add(new NameValuePair("maxFeatures", "200"));
+        valuePairList.add(new NameValuePair("maxFeatures", Integer.toString(maxFeatures)));
         
         if (filterString.length() > 0) {
         	valuePairList.add(new NameValuePair("cql_filter", filterString));
@@ -73,5 +80,5 @@ public class WFSGetFeatureMethodMakerGET implements IWFSGetFeatureMethodMaker {
         log.debug(queryStr);
 
         return method;
-    }
+	}
 }
