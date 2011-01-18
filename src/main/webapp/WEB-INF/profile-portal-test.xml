@@ -23,7 +23,7 @@
     <bean id="cswServiceList" class="java.util.ArrayList">
         <constructor-arg>
             <list>
-                <ref bean="cswBOMTest" />  
+                <ref bean="cswBOMDev" />  
                 <ref bean="cswAuscopeTest"/>              
             </list>
         </constructor-arg>

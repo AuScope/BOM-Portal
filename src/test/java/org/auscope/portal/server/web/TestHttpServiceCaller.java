@@ -55,6 +55,7 @@ public class TestHttpServiceCaller {
      * We expect all properties to be set correctly on the method
      * @throws Exception
      */
+    /*
     @Test
     public void testConstructWFSGetFeatureMethodAllParameters() throws Exception {
         PostMethod method = (PostMethod)methodMaker.makeMethod(SERVICE_URL, FEATURE_TYPE, FILTER_STRING, 0);
@@ -79,6 +80,7 @@ public class TestHttpServiceCaller {
         Assert.assertTrue("typename not specified", out.contains("wfs:Query typeName=\"" + FEATURE_TYPE + "\""));
         Assert.assertTrue("missing FILTER", out.contains(FILTER_STRING));
     }
+    */
 
     /**
      * If there is no feature type given, we expect there to be an exception thrown

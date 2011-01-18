@@ -22,7 +22,7 @@
         <property name="soTimeout" value="900000"/> <!--  15 minutes -->
    </bean>
   
-    <bean id="cswBOMTest" class="org.auscope.portal.server.web.service.CSWServiceItem">
+    <bean id="cswBOMDev" class="org.auscope.portal.server.web.service.CSWServiceItem">
         <constructor-arg index="0" value="http://auscope-portal-dev.arrc.csiro.au/bluenetmest/srv/en/csw"/>
     </bean> 
     

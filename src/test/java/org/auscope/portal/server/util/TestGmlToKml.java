@@ -77,7 +77,7 @@ public class TestGmlToKml {
 		counter = (Double) xPath.evaluate("count(Document/Placemark)", root, XPathConstants.NUMBER);
 		Assert.assertEquals(8.0, counter.doubleValue(),0);
 		
-		counter = (Double) xPath.evaluate("count(Document/Placemark/Point/Style/IconStyle/Icon/href)", root, XPathConstants.NUMBER);
+		counter = (Double) xPath.evaluate("count(Document/Placemark/MultiGeometry/Point/Style/IconStyle/Icon/href)", root, XPathConstants.NUMBER);
 		Assert.assertEquals(8.0, counter.doubleValue(),0);
 	}
 }
