@@ -158,6 +158,12 @@
        <constructor-arg name="description" value=""/>
        <constructor-arg name="layerName" value="onshore_only_Bouguer_geodetic"/>
    </bean>
+   <!--TODO: this layer is used to demonstrate coverage support in BOM portal, and should be removed afterward  -->
+   <bean id="knownTypeMeanSeaLevelPressure" class="org.auscope.portal.server.web.KnownLayerWMS">
+       <constructor-arg name="title" value="Mean Sea Level Pressure"/>
+       <constructor-arg name="description" value=""/>
+       <constructor-arg name="layerName" value="mslp"/>
+   </bean>
     
     <!-- This layer is NOT selectable, it is only used for hiding these features -->
     <bean id="knownTypeSamplingPoint" class="org.auscope.portal.server.web.KnownLayerWFS">

@@ -295,7 +295,7 @@ Ext.onReady(function() {
 
     //-----------Known Features Panel Configurations (Groupings of various CSWRecords)
     var knownLayersPanel = new KnownLayerGridPanel('kft-layers-panel',
-												    		'Feature Layers',
+												    		'Featured Layers',
 												    		knownLayersStore,
 												    		cswRecordStore,
 												    		knownLayerAddHandler,
@@ -787,7 +787,11 @@ Ext.onReady(function() {
                     parser.makeMarkers(icon, function(marker) {
                         marker.activeLayerRecord = activeLayerRecord.internalRecord;
                         marker.cswRecord = cswRecord.internalRecord;
-                        marker.onlineResource = onlineResource;
+                        marker.onlineResource = onlineResource;          
+                        marker.climateReportUrl = jsonResponse.climateReportUrl;
+                        marker.climateReportMType = jsonResponse.climateReportMType;
+                        marker.climateReportPType = jsonResponse.climateReportPType;
+                        marker.filterParameters = filterParameters;                  
                     });
 
                     var markers = parser.markers;

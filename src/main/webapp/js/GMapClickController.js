@@ -62,7 +62,7 @@ var genericParserClickHandler = function (map, overlay, latlng, parentOnlineReso
  * @version $Id$
  */
 var gMapClickController = function(map, overlay, latlng, overlayLatlng, activeLayersStore) {
-
+	
 	//If the reports popup menu is showing, destroy it.
 	var reportsMenu = Ext.getCmp('reportsMenu');
 	if(reportsMenu) {
@@ -104,8 +104,8 @@ var gMapClickController = function(map, overlay, latlng, overlayLatlng, activeLa
 	    	var wfsTypeName = parentOnlineResource.name;
 	    	var wfsUrl = parentOnlineResource.url;
 
-
-	    	if (overlay instanceof GMarker) {
+	    	if (overlay instanceof GMarker) {	    		
+	    		
 	            if (wfsTypeName === "gsml:Borehole") {
 	                var infoWindow = new NvclInfoWindow(map,overlay, wfsUrl);
 	                infoWindow.show();
@@ -125,6 +125,14 @@ var gMapClickController = function(map, overlay, latlng, overlayLatlng, activeLa
 	            	var infoWindow = new YilgarnGeoInfoWindow(map,overlay,wfsUrl,featureId,wfsTypeName);
 	            	infoWindow.show();
 	            	
+	            }
+	            else if (wfsTypeName == "wml:monthly_climate_summary" || 
+	            		wfsTypeName == "wml:daily_climate_summary" ||
+	            		wfsTypeName == "wml:extreme") {	    	            	
+	            	new BomMarker(overlay.title, overlay, overlay.description).markerClicked();
+	            }
+	            else if (wfsTypeName == "wml:high_quality_data_network_view") {
+	            	new BomHighQualityMarker(overlay.title, overlay, overlay.description).markerClicked();
 	            }
 	            else if (overlay.description !== null) {
 	                overlay.openInfoWindowHtml(overlay.description, {maxWidth:800, maxHeight:600, autoScroll:true});

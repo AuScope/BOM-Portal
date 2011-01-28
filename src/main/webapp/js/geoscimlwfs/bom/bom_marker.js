@@ -62,12 +62,14 @@ function BomMarker_markerClicked()
   var label1 = 'Summary';
   var label2 = 'WFS URL';
   
-  // check if there are any cql parameters and add the AND if there are
-  if (!oCql.endsWith("=")) {
-	  oCql += " AND ";
-  }
-	  
-  var url = oMarker.wfsUrl + "?service=WFS&version=1.1.0&request=GetFeature&srsName=EPSG%3A4326&" + oCql + "wml:station=" + sId;
+  // check if there are any cql parameters and add the AND if there are 
+  
+  var cql_filer = oCql.cql_filter;
+  if (!cql_filer.endsWith("=")) {
+	  cql_filer += " AND ";
+  }	   
+  
+  var url = oCql.serviceUrl + "?service=WFS&version=1.1.0&request=GetFeature&srsName=EPSG%3A4326&typeName=" + oCql.typeName + "&cql_filter=" + cql_filer + "wml:station=" + sId;
   var urlHtml = '<a target="_blank" href="' + url + '">WFS Request for Station '+ sId + '</a>';
   
   // Open the popup window for the marker with the tabs Main and Data
