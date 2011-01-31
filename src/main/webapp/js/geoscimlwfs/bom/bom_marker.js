@@ -65,7 +65,7 @@ function BomMarker_markerClicked()
   // check if there are any cql parameters and add the AND if there are 
   
   var cql_filer = oCql.cql_filter;
-  if (!cql_filer.endsWith("=")) {
+  if (cql_filer != "") {
 	  cql_filer += " AND ";
   }	   
   

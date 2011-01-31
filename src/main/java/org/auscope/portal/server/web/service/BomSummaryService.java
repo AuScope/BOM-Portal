@@ -43,15 +43,16 @@ public class BomSummaryService {
      * @param serviceUrl the url of the service to query
      * @param stationId the id of the station to query for
      * @param cql the cql filter string
+     * @param maxFeatures 
      * @return The GML result from the service query
      * @throws Exception
      */
-    public String getClimateSummaryGML(String featureType, String serviceURL, String cql) throws Exception {
+    public String getClimateSummaryGML(String featureType, String serviceURL, String cql, int maxFeatures) throws Exception {
 
         log.debug("\n" + serviceURL + "\n" + cql);
 
         //create a GetFeature request with filter constraints on a query
-        HttpMethodBase method = methodMaker.makeMethod(serviceURL, featureType, cql,200);
+        HttpMethodBase method = methodMaker.makeMethod(serviceURL, featureType, cql, maxFeatures);
 
         //call the service, and get the summary
         return httpServiceCaller.getMethodResponseAsString(method, httpServiceCaller.getHttpClient());

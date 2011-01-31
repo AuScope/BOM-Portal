@@ -89,12 +89,13 @@ public class BomFilterController {
     		@RequestParam("typeName") String featureType,
             @RequestParam("serviceUrl") String serviceUrl,
     		@RequestParam("cql_filter") String cql,
+    		@RequestParam(required=false, value="maxFeatures", defaultValue="0") int maxFeatures,
             HttpServletRequest request) {
 
         try {
             String gmlBlob;
 
-            gmlBlob = this.bomSummaryService.getClimateSummaryGML(featureType, serviceUrl, cql);
+            gmlBlob = this.bomSummaryService.getClimateSummaryGML(featureType, serviceUrl, cql, maxFeatures);
             String kmlBlob =  convertToKml(gmlBlob, request, serviceUrl);
             //log.debug(kmlBlob);
             
@@ -126,6 +127,7 @@ public class BomFilterController {
             @RequestParam("serviceUrl") String serviceUrl,
     		@RequestParam("data") String data,
     		@RequestParam("period") String period,
+    		@RequestParam(required=false, value="maxFeatures", defaultValue="0") int maxFeatures,
             HttpServletRequest request) {
 
         try {
@@ -152,7 +154,7 @@ public class BomFilterController {
             	cql.delete(cql.length()-3, cql.length());
             }
             
-            gmlBlob = this.bomSummaryService.getClimateSummaryGML(featureType, serviceUrl, cql.toString());
+            gmlBlob = this.bomSummaryService.getClimateSummaryGML(featureType, serviceUrl, cql.toString(), maxFeatures);
             String kmlBlob =  convertToKml(gmlBlob, request, serviceUrl);
             //log.debug(kmlBlob);
             
