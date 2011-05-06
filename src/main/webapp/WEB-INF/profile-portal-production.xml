@@ -15,6 +15,7 @@
                 <ref bean="knownTypeBomDaily" />
                 <ref bean="knownTypeBomExtreme" />
                 <ref bean="knownTypeBomHighQuality" />
+                <ref bean="knownTypeSurfaceReservoir"/>
             </list>
         </constructor-arg>
     </bean>

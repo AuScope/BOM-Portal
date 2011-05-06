@@ -152,6 +152,32 @@
            </bean>
        </constructor-arg>
    </bean> 
+   
+   <bean id="knownTypeSurfaceReservoir" class="org.auscope.portal.server.web.KnownLayerWFS">
+       <constructor-arg name="featureTypeName" value="slake:SurfaceReservoir"/>
+       <constructor-arg name="title" value="Surface Reservoir Feature Type"/>
+       <constructor-arg name="description" value="Surface Reservoir Feature Type"/>
+       <constructor-arg name="proxyUrl" value="getSurfaceReservoirFeature.do"/>
+       <constructor-arg name="iconUrl" value="http://maps.google.com/mapfiles/kml/paddle/wht-diamond.png"/>
+       <constructor-arg name="iconAnchor">
+           <bean class="java.awt.Point">
+               <constructor-arg index="0" value="16"/>
+               <constructor-arg index="1" value="32"/>
+           </bean>
+       </constructor-arg>
+       <constructor-arg name="infoWindowAnchor">
+           <bean class="java.awt.Point">
+               <constructor-arg index="0" value="16"/>
+               <constructor-arg index="1" value="32"/>
+           </bean>
+       </constructor-arg>
+       <constructor-arg name="iconSize">
+           <bean class="java.awt.Dimension">
+               <constructor-arg index="0" value="32"/>
+               <constructor-arg index="1" value="32"/>
+           </bean>
+       </constructor-arg>
+   </bean>
    <!--TODO: this layer is used to demonstrate coverage support in BOM portal, and should be removed afterward  -->
    <bean id="knownTypeBouguerGeodetic" class="org.auscope.portal.server.web.KnownLayerWMS">
        <constructor-arg name="title" value="Onshore Only Bouguer Geodetic"/>

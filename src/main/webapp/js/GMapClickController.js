@@ -135,7 +135,21 @@ var gMapClickController = function(map, overlay, latlng, overlayLatlng, activeLa
 	            	new BomHighQualityMarker(overlay.title, overlay, overlay.description).markerClicked();
 	            }
 	            else if (overlay.description !== null) {
-	                overlay.openInfoWindowHtml(overlay.description, {maxWidth:800, maxHeight:600, autoScroll:true});
+	            	
+	            	//Our html comes from our overlay description but wrapped in a div to ensure it has a scrollbar
+	            	var html = '';
+	            	if (Ext.isIE) {
+	    				html += '<div style="';
+	    				html += 'width: expression(!document.body ? &quot;auto&quot; : (document.body.clientWidth > 599 ? &quot;600px&quot; : &quot;auto&quot;) );';
+	    				html += 'height: expression( this.scrollHeight > 549 ? &quot;550px&quot; : &quot;auto&quot; );';
+	    				html += 'overflow: auto;">';
+	    			} else {
+	    				html += '<div style="max-width: 600px; max-height: 550px; overflow: auto;">';
+	    			}
+	            	html += overlay.description;
+	            	html += '</div>';
+	            	
+	                overlay.openInfoWindowHtml(html, {maxWidth:800, maxHeight:600, autoScroll:true});
 	            }
 	        //Otherwise it could be a WFS polygon
 	        } else if (overlay.description !== null) {

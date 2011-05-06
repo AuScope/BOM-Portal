@@ -17,6 +17,7 @@
                 <ref bean="knownTypeBomHighQuality" />
                 <ref bean="knownTypeBouguerGeodetic" />
                 <ref bean="knownTypeMeanSeaLevelPressure" />
+                <ref bean="knownTypeSurfaceReservoir"/>
             </list>
         </constructor-arg>
     </bean>

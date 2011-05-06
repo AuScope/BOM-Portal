@@ -22,6 +22,7 @@
                 <ref bean="knownTypeYilgarnGeochemistry"/>
                 <ref bean="knownTypeSamplingPoint"/>
                 <ref bean="knownTypeFeatureCollection"/>
+                <ref bean="knownTypeSurfaceReservoir"/>
             </list>
         </constructor-arg>
     </bean>

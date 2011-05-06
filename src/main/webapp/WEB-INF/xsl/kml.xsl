@@ -11,6 +11,7 @@
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:xlink="http://www.w3.org/1999/xlink"
     xmlns:wml="http://bom"
+    xmlns:slake="http://xlmns.siss.csiro.au/slake/0.1"
     exclude-result-prefixes="er geodesy gml gsml ngcp sa wfs xsl xlink wml">
 
    <xsl:output method="xml" version="1.0" encoding="UTF-8" indent="no"
@@ -458,6 +459,36 @@
       </Placemark>
    </xsl:template>
 
+	<!-- Slake - Surface Reservoir -->
+	<!-- ================================================================= -->
+	<xsl:template match="gml:featureMembers/slake:SurfaceReservoir" priority="100">
+
+      <xsl:variable name="coordinates">
+         <xsl:value-of select="slake:shape/gml:Point/gml:pos"/>
+      </xsl:variable>
+
+      <xsl:variable name="rawId">
+         <xsl:value-of select="./gml:name[@codeSpace='http://www.ietf.org/rfc/rfc2616']"/>
+      </xsl:variable>
+
+      <xsl:variable name="idTokens" select="tokenize($rawId, '/')"/>
+
+      <Placemark>
+         <name><xsl:value-of select="$idTokens[last()]"/></name>
+         <description>
+            <![CDATA[<table style="border-spacing:0px 6px;" border="0" cellspacing="0" width="100%">
+            <tr><td>Reservoir Name</td><td>]]><xsl:value-of select="./slake:reservoirName/slake:ReservoirName/slake:name"/>
+            <![CDATA[</td></tr><tr><td>Reservoir Type</td><td>]]><xsl:value-of select="./slake:reservoirName/slake:ReservoirName/slake:type"/>
+            <![CDATA[</td></tr><tr><td>Description</td><td>]]><xsl:value-of select="./gml:description"/>
+            <![CDATA[</td></tr><tr><td>Year of Completion</td><td>]]><xsl:value-of select="./slake:yearOfCompletion"/>
+            <![CDATA[</td></tr><tr><td>Total Storage Capacity</td><td>]]><xsl:value-of select="./slake:measuredDetails/slake:StorageDetails/slake:totalStorageCapacity"/> <![CDATA[ <a target="_blank" href="]]><xsl:value-of select="./slake:measuredDetails/slake:StorageDetails/slake:totalStorageCapacity/@uom"/><![CDATA["> units</a>]]>
+            <![CDATA[</td></tr><tr><td>Data Provider</td><td>]]><xsl:value-of select="./slake:providerMetadata/slake:ProviderDetails/slake:dataProvider"/>
+            <![CDATA[</td></tr></table>]]>
+         </description>
+
+         <xsl:apply-templates select="slake:shape/gml:Point"/>
+      </Placemark>
+   </xsl:template>
 
    <!-- TEMPLATE FOR TRANSLATING NVCL -->
    <!-- ================================================================= -->
