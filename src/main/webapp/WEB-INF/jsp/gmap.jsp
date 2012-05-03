@@ -15,27 +15,28 @@
       <script src="http://gmaps-utility-library.googlecode.com/svn/trunk/markermanager/release/src/markermanager.js"
              type="text/javascript"></script>
 
+      <%-- Open Layers Imports --%>
+      <link rel="stylesheet" href="js/OpenLayers-2.11/theme/default/style.css" type="text/css">
+      <script src="js/OpenLayers-2.11/OpenLayers.js" type="text/javascript"></script>
+
+
       <script type="text/javascript">
          var VOCAB_SERVICE_URL = "${vocabServiceUrl}";
          var NVCL_WEB_SERVICE_IP = "${nvclWebServiceIP}";
          var MAX_FEATURES = "${maxFeatureValue}";
          var WEB_CONTEXT = '<%= request.getContextPath() %>';
-         
+
       </script>
 
+      <%-- Framework imports - relative paths back to the webapp directory --%>
+      <jsp:include page="../../frameworkimports.htm"/>
       <%-- CSS imports - relative paths back to the webapp directory--%>
       <jsp:include page="../../cssimports.htm"/>
       <%-- JS imports - relative paths back to the webapp directory --%>
       <jsp:include page="../../jsimports.htm"/>
-      
-      <!-- To enable text selection within a Ext JS GridPanel -->
-	  <style type="text/css">
-	    .x-selectable, .x-selectable * {
-	        -moz-user-select: text!important;
-	        -khtml-user-select: text!important;
-	    }
-  	  </style>
-      
+
+      <script src="js/portal/Main-UI.js" type="text/javascript"></script>
+
       <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
    </head>
 

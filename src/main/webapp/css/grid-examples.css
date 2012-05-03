@@ -7,28 +7,28 @@
  */
 
 #grid-example .x-grid-col-1 {
-	text-align: right;
+    text-align: right;
 }
 #grid-example .x-grid-col-2{
-	text-align: right;
+    text-align: right;
 }
 #grid-example .x-grid-col-3 {
-	text-align: right;
+    text-align: right;
 }
 #grid-example .x-grid-col-4 {
-	text-align: right;
+    text-align: right;
 }
 #grid-example.x-grid-mso{
-	border: 1px solid #6593cf;
+    border: 1px solid #6593cf;
 }
 #grid-example.x-grid-vista{
-	border: 1px solid #b3bcc0;
+    border: 1px solid #b3bcc0;
 }
 #xml-grid-example{
-	border: 1px solid #cbc7b8;
-	left: 0;
-	position: relative;
-	top: 0;
+    border: 1px solid #cbc7b8;
+    left: 0;
+    position: relative;
+    top: 0;
 }
 #editor-grid .x-grid-col-2{
     text-align:right;
@@ -66,4 +66,28 @@
 
 .remove {
     background-image:url(../img/delete.gif) !important;
+}
+.stop{
+    background-image:url(../img/drop-no.gif) !important;
+
+}
+
+.info {
+    background-image:url(../img/information.png) !important;
+}
+
+.download {
+    background-image:url(../img/download.png) !important;
+}
+
+.magglass {
+    background-image:url(../img/magglass.gif) !important;
+}
+
+.portrayal {
+    background-image:url(../img/picture-small.png) !important;
+}
+
+.data {
+    background-image:url(../img/binary-small.png) !important;
 }

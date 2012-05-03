@@ -26,22 +26,12 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class MenuController {
 
-   protected final Log logger = LogFactory.getLog(getClass());
+   private final Log logger = LogFactory.getLog(getClass());
 
    @Autowired
    @Qualifier(value = "propertyConfigurer")
    private PortalPropertyPlaceholderConfigurer hostConfigurer;
 
-   @RequestMapping("/genericparser.html")
-   public ModelAndView genericParser() {
-	   String googleKey = hostConfigurer.resolvePlaceholder("HOST.googlemap.key");
-	   
-	   ModelAndView mav = new ModelAndView("genericparser");
-	      mav.addObject("googleKey", googleKey);
-	      
-	   return mav;
-   }
-   
    @RequestMapping("/gmap.html")
    public ModelAndView gmap() {
       String googleKey
@@ -49,7 +39,7 @@ public class MenuController {
       String vocabServiceUrl
          = hostConfigurer.resolvePlaceholder("HOST.vocabService.url");
       String maxFeatureValue
-      	 = hostConfigurer.resolvePlaceholder("HOST.maxFeatures.value");
+           = hostConfigurer.resolvePlaceholder("HOST.maxFeatures.value");
 
       logger.debug("googleKey: " + googleKey);
       logger.debug("vocabServiceUrl: " + vocabServiceUrl);
@@ -89,42 +79,48 @@ public class MenuController {
       return new ModelAndView("links");
    }
 
+   @RequestMapping("/admin.html")
+   public ModelAndView admin(HttpServletRequest request) {
+       return generateViewFromManifest(request, "admin");
+   }
+
+   private ModelAndView generateViewFromManifest(HttpServletRequest request, String viewName) {
+       String appServerHome = request.getSession().getServletContext().getRealPath("/");
+       File manifestFile = new File(appServerHome,"META-INF/MANIFEST.MF");
+       Manifest mf = new Manifest();
+       ModelAndView mav = new ModelAndView(viewName);
+       try {
+          mf.read(new FileInputStream(manifestFile));
+          Attributes atts = mf.getMainAttributes();
+          if (mf != null) {
+             mav.addObject("specificationTitle", atts.getValue("Specification-Title"));
+             mav.addObject("implementationVersion", atts.getValue("Implementation-Version"));
+             mav.addObject("implementationBuild", atts.getValue("Implementation-Build"));
+             mav.addObject("buildDate", atts.getValue("buildDate"));
+             mav.addObject("buildJdk", atts.getValue("Build-Jdk"));
+             mav.addObject("javaVendor", atts.getValue("javaVendor"));
+             mav.addObject("builtBy", atts.getValue("Built-By"));
+             mav.addObject("osName", atts.getValue("osName"));
+             mav.addObject("osVersion", atts.getValue("osVersion"));
+
+             mav.addObject("serverName", request.getServerName());
+             mav.addObject("serverInfo", request.getSession().getServletContext().getServerInfo());
+             mav.addObject("serverJavaVersion", System.getProperty("java.version"));
+             mav.addObject("serverJavaVendor", System.getProperty("java.vendor"));
+             mav.addObject("javaHome", System.getProperty("java.home"));
+             mav.addObject("serverOsArch", System.getProperty("os.arch"));
+             mav.addObject("serverOsName", System.getProperty("os.name"));
+             mav.addObject("serverOsVersion", System.getProperty("os.version"));
+          }
+       } catch (IOException e) {
+          /* ignore, since we'll just leave an empty form */
+           logger.debug(e.getMessage());
+       }
+       return mav;
+   }
+
    @RequestMapping("/about.html")
    public ModelAndView about(HttpServletRequest request) {
-
-      String appServerHome = request.getSession().getServletContext().getRealPath("/");
-      File manifestFile = new File(appServerHome,"META-INF/MANIFEST.MF");
-      Manifest mf = new Manifest();
-      ModelAndView mav = new ModelAndView("about");
-      try {
-         mf.read(new FileInputStream(manifestFile));
-         Attributes atts = mf.getMainAttributes();
-         if (mf != null) {
-            mav.addObject("specificationTitle", atts.getValue("Specification-Title"));
-            mav.addObject("implementationVersion", atts.getValue("Implementation-Version"));
-            mav.addObject("implementationBuild", atts.getValue("Implementation-Build"));
-            mav.addObject("buildDate", atts.getValue("buildDate"));
-            mav.addObject("buildJdk", atts.getValue("Build-Jdk"));
-            mav.addObject("javaVendor", atts.getValue("javaVendor"));
-            mav.addObject("builtBy", atts.getValue("Built-By"));
-            mav.addObject("osName", atts.getValue("osName"));
-            mav.addObject("osVersion", atts.getValue("osVersion"));
-
-            mav.addObject("serverName", request.getServerName());
-            mav.addObject("serverInfo", request.getSession().getServletContext().getServerInfo());
-            mav.addObject("serverJavaVersion", System.getProperty("java.version"));
-            mav.addObject("serverJavaVendor", System.getProperty("java.vendor"));
-            mav.addObject("javaHome", System.getProperty("java.home"));
-            mav.addObject("serverOsArch", System.getProperty("os.arch"));
-            mav.addObject("serverOsName", System.getProperty("os.name"));
-            mav.addObject("serverOsVersion", System.getProperty("os.version"));
-         } else {
-            logger.error("Error reading manifest file.");
-         }
-      } catch (IOException e) {
-         /* ignore, since we'll just leave an empty form */
-         e.printStackTrace();
-      }
-      return mav;
+       return generateViewFromManifest(request, "about");
    }
 }
