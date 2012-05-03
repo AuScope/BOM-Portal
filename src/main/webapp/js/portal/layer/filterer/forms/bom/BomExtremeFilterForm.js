@@ -53,7 +53,7 @@ Ext.define('portal.layer.filterer.forms.bom.BomExtremeFilterForm', {
                       name       : 'typeName',
                       value: 'wml:extreme'
                     },{
-                        // column layout with 2 columns
+                      // column layout with 2 columns
                       layout:'column',
                       border: false,
                       items:[{
@@ -61,6 +61,7 @@ Ext.define('portal.layer.filterer.forms.bom.BomExtremeFilterForm', {
                           border: false,
                           layout:'form',
                           bodyStyle:'margin:0 3px 0 0px',
+                          columnWidth: 1.0,
                           items:[{
                               xtype      : 'numberfield',
                               fieldLabel : 'Station',
@@ -70,6 +71,7 @@ Ext.define('portal.layer.filterer.forms.bom.BomExtremeFilterForm', {
                           }]
                       },{
                           // right column
+                          columnWidth: 40,
                           width: 40,
                           border: false,
                           items:[opStation]
@@ -83,6 +85,7 @@ Ext.define('portal.layer.filterer.forms.bom.BomExtremeFilterForm', {
                           border: false,
                           layout:'form',
                           bodyStyle:'margin:0 3px 0 0',
+                          columnWidth: 1.0,
                           items:[{
                               xtype      : 'numberfield',
                               fieldLabel : 'Max Temp',
@@ -92,6 +95,7 @@ Ext.define('portal.layer.filterer.forms.bom.BomExtremeFilterForm', {
                           }]
                       },{
                           // right column
+                          columnWidth: 40,
                           width: 40,
                           border: false,
                           items:[opMaxTemp]
@@ -105,6 +109,7 @@ Ext.define('portal.layer.filterer.forms.bom.BomExtremeFilterForm', {
                           border: false,
                           layout:'form',
                           bodyStyle:'margin:0 3px 0 0',
+                          columnWidth: 1.0,
                           items:[{
                               xtype      : 'numberfield',
                               fieldLabel : 'Min Temp',
@@ -114,6 +119,7 @@ Ext.define('portal.layer.filterer.forms.bom.BomExtremeFilterForm', {
                           }]
                       },{
                           // right column
+                          columnWidth: 40,
                           width: 40,
                           border: false,
                           items:[opMinTemp]
@@ -127,6 +133,7 @@ Ext.define('portal.layer.filterer.forms.bom.BomExtremeFilterForm', {
                           border: false,
                           layout:'form',
                           bodyStyle:'margin:0 3px 0 0',
+                          columnWidth: 1.0,
                           items:[{
                               xtype      : 'numberfield',
                               fieldLabel : 'Max Air Pressure',
@@ -136,6 +143,7 @@ Ext.define('portal.layer.filterer.forms.bom.BomExtremeFilterForm', {
                           }]
                       },{
                           // right column
+                          columnWidth: 40,
                           width: 40,
                           border: false,
                           items:[opMaxAirPressure]
@@ -149,6 +157,7 @@ Ext.define('portal.layer.filterer.forms.bom.BomExtremeFilterForm', {
                           border: false,
                           layout:'form',
                           bodyStyle:'margin:0 3px 0 0',
+                          columnWidth: 1.0,
                           items:[{
                               xtype      : 'numberfield',
                               fieldLabel : 'Min Air Pressure',
@@ -158,6 +167,7 @@ Ext.define('portal.layer.filterer.forms.bom.BomExtremeFilterForm', {
                           }]
                       },{
                           // right column
+                          columnWidth: 40,
                           width: 40,
                           border: false,
                           items:[opMinAirPressure]
@@ -171,6 +181,7 @@ Ext.define('portal.layer.filterer.forms.bom.BomExtremeFilterForm', {
                           border: false,
                           layout:'form',
                           bodyStyle:'margin:0 3px 0 0',
+                          columnWidth: 1.0,
                           items:[{
                               xtype      : 'numberfield',
                               fieldLabel : 'Max Wind Speed',
@@ -180,6 +191,7 @@ Ext.define('portal.layer.filterer.forms.bom.BomExtremeFilterForm', {
                           }]
                       },{
                           // right column
+                          columnWidth: 40,
                           width: 40,
                           border: false,
                           items:[opMaxWindSpeed]
@@ -193,6 +205,7 @@ Ext.define('portal.layer.filterer.forms.bom.BomExtremeFilterForm', {
                           border: false,
                           layout:'form',
                           bodyStyle:'margin:0 3px 0 0',
+                          columnWidth: 1.0,
                           items:[{
                               xtype      : 'numberfield',
                               fieldLabel : 'Min Wind Speed',
@@ -202,6 +215,7 @@ Ext.define('portal.layer.filterer.forms.bom.BomExtremeFilterForm', {
                           }]
                       },{
                           // right column
+                          columnWidth: 40,
                           width: 40,
                           border: false,
                           items:[opMinWindSpeed]
@@ -215,6 +229,7 @@ Ext.define('portal.layer.filterer.forms.bom.BomExtremeFilterForm', {
                           border: false,
                           layout:'form',
                           bodyStyle:'margin:0 3px 0 0',
+                          columnWidth: 1.0,
                           items:[{
                               xtype      : 'numberfield',
                               fieldLabel : 'Max Wind Direction',
@@ -224,6 +239,7 @@ Ext.define('portal.layer.filterer.forms.bom.BomExtremeFilterForm', {
                           }]
                       },{
                           // right column
+                          columnWidth: 40,
                           width: 40,
                           border: false,
                           items:[opMaxWindDirection]
@@ -237,6 +253,7 @@ Ext.define('portal.layer.filterer.forms.bom.BomExtremeFilterForm', {
                           border: false,
                           layout:'form',
                           bodyStyle:'margin:0 3px 0 0',
+                          columnWidth: 1.0,
                           items:[{
                               xtype      : 'numberfield',
                               fieldLabel : 'Min Wind Direction',
@@ -246,6 +263,7 @@ Ext.define('portal.layer.filterer.forms.bom.BomExtremeFilterForm', {
                           }]
                       },{
                           // right column
+                          columnWidth: 40,
                           width: 40,
                           border: false,
                           items:[opMinWindDirection]
@@ -259,6 +277,7 @@ Ext.define('portal.layer.filterer.forms.bom.BomExtremeFilterForm', {
                           border: false,
                           layout:'form',
                           bodyStyle:'margin:0 3px 0 0',
+                          columnWidth: 1.0,
                           items:[{
                               xtype      : 'numberfield',
                               fieldLabel : 'Max Monthly Rainfall',
@@ -268,6 +287,7 @@ Ext.define('portal.layer.filterer.forms.bom.BomExtremeFilterForm', {
                           }]
                       },{
                           // right column
+                          columnWidth: 40,
                           width: 40,
                           border: false,
                           items:[opMaxMonthlyRainfall]
@@ -281,6 +301,7 @@ Ext.define('portal.layer.filterer.forms.bom.BomExtremeFilterForm', {
                           border: false,
                           layout:'form',
                           bodyStyle:'margin:0 3px 0 0',
+                          columnWidth: 1.0,
                           items:[{
                               xtype      : 'numberfield',
                               fieldLabel : 'Max Daily Rainfall',
@@ -290,6 +311,7 @@ Ext.define('portal.layer.filterer.forms.bom.BomExtremeFilterForm', {
                           }]
                       },{
                           // right column
+                          columnWidth: 40,
                           width: 40,
                           border: false,
                           items:[opMaxDailyRainfall]

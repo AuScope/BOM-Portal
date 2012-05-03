@@ -61,6 +61,7 @@ Ext.define('portal.layer.filterer.forms.bom.BomDailySummaryFilterForm', {
                           border: false,
                           layout:'form',
                           bodyStyle:'margin:0 3px 0 0',
+                          columnWidth: 1.0,
                           items:[{
                               xtype      : 'numberfield',
                               fieldLabel : 'Station',
@@ -70,6 +71,7 @@ Ext.define('portal.layer.filterer.forms.bom.BomDailySummaryFilterForm', {
                           }]
                       },{
                           // right column
+                          columnWidth: 40,
                           width: 40,
                           border: false,
                           items:[opStation]
@@ -80,11 +82,12 @@ Ext.define('portal.layer.filterer.forms.bom.BomDailySummaryFilterForm', {
                       border: false,
                       bodyStyle:'margin:0 0 4px 0',
                       items: [{
+                          columnWidth: 133,
                           width: 133,
                           border: false,
                           items: [tempCombo]
                       },{
-                          width: 130,
+                          columnWidth: 1.0,
                           border: false,
                           items: [{
                               xtype      : 'numberfield',
@@ -93,6 +96,7 @@ Ext.define('portal.layer.filterer.forms.bom.BomDailySummaryFilterForm', {
                               submitValue: false
                           }]
                       },{
+                          columnWidth: 40,
                           width: 40,
                           border: false,
                           items: [opTemp]
@@ -106,6 +110,7 @@ Ext.define('portal.layer.filterer.forms.bom.BomDailySummaryFilterForm', {
                           border: false,
                           layout:'form',
                           bodyStyle:'margin:0 3px 0 0',
+                          columnWidth: 1.0,
                           items:[{
                               xtype      : 'numberfield',
                               fieldLabel : 'Rainfall',
@@ -115,6 +120,7 @@ Ext.define('portal.layer.filterer.forms.bom.BomDailySummaryFilterForm', {
                           }]
                       },{
                           // right column
+                          columnWidth: 40,
                           width: 40,
                           border: false,
                           items:[opRainfall]
@@ -128,6 +134,7 @@ Ext.define('portal.layer.filterer.forms.bom.BomDailySummaryFilterForm', {
                           border: false,
                           layout:'form',
                           bodyStyle:'margin:0 3px 0 0',
+                          columnWidth: 1.0,
                           items:[{
                               xtype      : 'numberfield',
                               fieldLabel : 'Max Wind Speed',
@@ -137,6 +144,7 @@ Ext.define('portal.layer.filterer.forms.bom.BomDailySummaryFilterForm', {
                           }]
                       },{
                           // right column
+                          columnWidth: 40,
                           width: 40,
                           border: false,
                           items:[opWindSpeed]
@@ -150,6 +158,7 @@ Ext.define('portal.layer.filterer.forms.bom.BomDailySummaryFilterForm', {
                           border: false,
                           layout:'form',
                           bodyStyle:'margin:0 3px 0 0',
+                          columnWidth: 1.0,
                           items:[{
                               xtype      : 'numberfield',
                               fieldLabel : 'Max Wind Direction',
@@ -159,6 +168,7 @@ Ext.define('portal.layer.filterer.forms.bom.BomDailySummaryFilterForm', {
                           }]
                       },{
                           // right column
+                          columnWidth: 40,
                           width: 40,
                           border: false,
                           items:[opWindDirection]
