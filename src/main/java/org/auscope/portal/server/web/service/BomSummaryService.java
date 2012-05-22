@@ -3,11 +3,11 @@ package org.auscope.portal.server.web.service;
 import org.apache.commons.httpclient.HttpMethodBase;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.auscope.portal.server.domain.wfs.WFSKMLResponse;
-import org.auscope.portal.server.util.GmlToHtml;
-import org.auscope.portal.server.util.GmlToKml;
-import org.auscope.portal.server.web.WFSGetFeatureMethodMaker;
-import org.auscope.portal.server.web.WFSGetFeatureMethodMaker.ResultType;
+import org.auscope.portal.core.server.http.HttpServiceCaller;
+import org.auscope.portal.core.services.BaseWFSService;
+import org.auscope.portal.core.services.methodmakers.WFSGetFeatureMethodMaker;
+import org.auscope.portal.core.services.responses.wfs.WFSTransformedResponse;
+import org.auscope.portal.core.xslt.WfsToKmlTransformer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,14 +23,16 @@ public class BomSummaryService extends BaseWFSService {
 
     protected final Log log = LogFactory.getLog(getClass());
 
+    private WfsToKmlTransformer gmlToKml;
 
     // ----------------------------------------------------------- Constructors
 
     @Autowired
     public BomSummaryService(HttpServiceCaller httpServiceCaller,
             WFSGetFeatureMethodMaker wfsMethodMaker,
-            GmlToKml gmlToKml, GmlToHtml gmlToHtml) {
-        super(httpServiceCaller, wfsMethodMaker, gmlToKml, gmlToHtml);
+            WfsToKmlTransformer gmlToKml) {
+        super(httpServiceCaller, wfsMethodMaker);
+        this.gmlToKml = gmlToKml;
     }
 
 
@@ -46,13 +48,19 @@ public class BomSummaryService extends BaseWFSService {
      * @return The GML result from the service query
      * @throws Exception
      */
-    public WFSKMLResponse getClimateSummaryAsKml(String featureType, String serviceURL, String cql, int maxFeatures) throws Exception {
+    public WFSTransformedResponse getClimateSummaryAsKml(String featureType, String serviceURL, String cql, int maxFeatures) throws Exception {
 
         log.debug(serviceURL + "\n" + cql);
 
         //create a GetFeature request with filter constraints on a query
-        HttpMethodBase method = this.generateWFSRequest(serviceURL, featureType, null, cql, true, maxFeatures, null, ResultType.Hits);
+        HttpMethodBase method = this.wfsMethodMaker.makeGetMethod(serviceURL, featureType, cql, maxFeatures, BaseWFSService.DEFAULT_SRS);
 
-        return this.getWfsResponseAsKml(serviceURL, method);
+        try {
+            String wfs = this.httpServiceCaller.getMethodResponseAsString(method);
+            String kml = this.gmlToKml.convert(wfs, serviceURL);
+            return new WFSTransformedResponse(wfs, kml, method);
+        } catch (Exception ex) {
+            throw new PortalServiceException(method, "Error requesting/parsing data", ex);
+        }
     }
 }

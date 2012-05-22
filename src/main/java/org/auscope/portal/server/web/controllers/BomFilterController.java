@@ -2,8 +2,9 @@ package org.auscope.portal.server.web.controllers;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.auscope.portal.server.domain.wfs.WFSKMLResponse;
-import org.auscope.portal.server.util.PortalPropertyPlaceholderConfigurer;
+import org.auscope.portal.core.server.PortalPropertyPlaceholderConfigurer;
+import org.auscope.portal.core.server.controllers.BasePortalController;
+import org.auscope.portal.core.services.responses.wfs.WFSTransformedResponse;
 import org.auscope.portal.server.web.service.BomSummaryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -64,8 +65,8 @@ public class BomFilterController extends BasePortalController {
             HttpServletRequest request) {
 
         try {
-            WFSKMLResponse response = this.bomSummaryService.getClimateSummaryAsKml(featureType, serviceUrl, cql, maxFeatures);
-            return generateJSONResponseMAV(true, response.getGml(), response.getKml(), response.getMethod());
+            WFSTransformedResponse response = this.bomSummaryService.getClimateSummaryAsKml(featureType, serviceUrl, cql, maxFeatures);
+            return generateJSONResponseMAV(true, response.getGml(), response.getTransformed(), response.getMethod());
         } catch (Exception e) {
             return this.generateExceptionResponse(e, serviceUrl);
         }
@@ -113,8 +114,8 @@ public class BomFilterController extends BasePortalController {
                 cql.delete(cql.length()-3, cql.length());
             }
 
-            WFSKMLResponse response = this.bomSummaryService.getClimateSummaryAsKml(featureType, serviceUrl, cql.toString(), maxFeatures);
-            ModelAndView mav = generateJSONResponseMAV(true, response.getGml(), response.getKml(), response.getMethod());
+            WFSTransformedResponse response = this.bomSummaryService.getClimateSummaryAsKml(featureType, serviceUrl, cql.toString(), maxFeatures);
+            ModelAndView mav = generateJSONResponseMAV(true, response.getGml(), response.getTransformed(), response.getMethod());
 
             mav.addObject("climateReportUrl", hostConfigurer.resolvePlaceholder("HOST.climatereport.url"));
             mav.addObject("climateReportMType", climateReportDataType);

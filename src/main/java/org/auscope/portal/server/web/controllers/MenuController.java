@@ -11,7 +11,8 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.auscope.portal.server.util.PortalPropertyPlaceholderConfigurer;
+import org.auscope.portal.core.server.PortalPropertyPlaceholderConfigurer;
+import org.auscope.portal.core.server.controllers.BasePortalController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -24,7 +25,7 @@ import org.springframework.web.servlet.ModelAndView;
  * @author Jarek Sanders
  */
 @Controller
-public class MenuController {
+public class MenuController extends BasePortalController {
 
    private final Log logger = LogFactory.getLog(getClass());
 
