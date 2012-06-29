@@ -141,4 +141,57 @@
         </property>
     </bean>
 
+    <bean id="knownTypeAnzcw" class="org.auscope.portal.core.view.knownlayer.KnownLayer">
+        <constructor-arg name="id" value="reports-anzcw"/>
+        <constructor-arg name="knownLayerSelector">
+            <bean class="org.auscope.portal.knownlayers.IdPatternSelector">
+                <constructor-arg name="regex" value="ANZCW.*"/>
+            </bean>
+        </constructor-arg>
+        <property name="name" value="Geofabric Reports"/>
+        <property name="description" value=""/>
+        <property name="group" value="Reports"/>
+        <property name="proxyUrl" value=""/>
+        <property name="proxyCountUrl" value=""/>
+        <property name="iconUrl" value="http://maps.google.com/mapfiles/kml/paddle/wht-diamond.png"/>
+        <property name="iconAnchor">
+            <bean class="java.awt.Point">
+                <constructor-arg index="0" value="16"/>
+                <constructor-arg index="1" value="32"/>
+            </bean>
+        </property>
+        <property name="iconSize">
+            <bean class="java.awt.Dimension">
+                <constructor-arg index="0" value="32"/>
+                <constructor-arg index="1" value="32"/>
+            </bean>
+        </property>
+    </bean>
+
+    <bean id="knownTypeSims" class="org.auscope.portal.core.view.knownlayer.KnownLayer">
+        <constructor-arg name="id" value="reports-sims"/>
+        <constructor-arg name="knownLayerSelector">
+            <bean class="org.auscope.portal.knownlayers.IdPatternSelector">
+                <constructor-arg name="regex" value="SIMS.*"/>
+            </bean>
+        </constructor-arg>
+        <property name="name" value="SIMS Reports"/>
+        <property name="description" value=""/>
+        <property name="group" value="Reports"/>
+        <property name="proxyUrl" value=""/>
+        <property name="proxyCountUrl" value=""/>
+        <property name="iconUrl" value="http://maps.google.com/mapfiles/kml/paddle/wht-diamond.png"/>
+        <property name="iconAnchor">
+            <bean class="java.awt.Point">
+                <constructor-arg index="0" value="16"/>
+                <constructor-arg index="1" value="32"/>
+            </bean>
+        </property>
+        <property name="iconSize">
+            <bean class="java.awt.Dimension">
+                <constructor-arg index="0" value="32"/>
+                <constructor-arg index="1" value="32"/>
+            </bean>
+        </property>
+    </bean>
 </beans>

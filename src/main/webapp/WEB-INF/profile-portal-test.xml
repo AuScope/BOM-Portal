@@ -17,6 +17,8 @@
                 <ref bean="knownTypeBomExtreme" />
                 <ref bean="knownTypeBomHighQuality" />
                 <ref bean="knownTypeSurfaceReservoir"/>
+                <ref bean="knownTypeAnzcw"/>
+                <ref bean="knownTypeSims"/>
             </list>
         </constructor-arg>
     </bean>
@@ -24,8 +26,7 @@
     <bean id="cswServiceList" class="java.util.ArrayList">
         <constructor-arg>
             <list>
-                <ref bean="cswMDUTest" />
-                <ref bean="cswAuscopeTest" />
+                <ref bean="cswBomTest" />
             </list>
         </constructor-arg>
     </bean>

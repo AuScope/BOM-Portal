@@ -25,28 +25,12 @@
         <constructor-arg name="serviceUrl" value="http://portal.auscope.org/geonetwork/srv/en/csw"/>
         <constructor-arg name="recordInformationUrl" value="http://portal.auscope.org/geonetwork/srv/en/main.home?uuid=%1$s"/>
     </bean>
-    <bean id="cswMDUTest" class="org.auscope.portal.core.services.csw.CSWServiceItem">
-        <constructor-arg name="id" value="cswMDUTest"/>
-        <constructor-arg name="title" value="MDU Test Geonetwork"/>
-        <constructor-arg name="serviceUrl" value="http://mdu-data-2.arrc.csiro.au/geonetwork/srv/en/csw"/>
-        <constructor-arg name="recordInformationUrl" value="http://mdu-data-2.arrc.csiro.au/geonetwork/srv/en/metadata.show?uuid=%1$s"/>
-    </bean>
-    <bean id="cswMDUProduction" class="org.auscope.portal.core.services.csw.CSWServiceItem">
-        <constructor-arg name="id" value="cswMDUProduction"/>
-        <constructor-arg name="title" value="MDU Geonetwork"/>
-        <constructor-arg name="serviceUrl" value="http://mdu-data.arrc.csiro.au/geonetwork/srv/en/csw"/>
-        <constructor-arg name="recordInformationUrl" value="http://mdu-data.arrc.csiro.au/geonetwork/srv/en/main.home?uuid=%1$s"/>
-    </bean>
-    <bean id="cswSissANUProduction" class="org.auscope.portal.core.services.csw.CSWServiceItem">
-        <constructor-arg name="id" value="cswSissANUProduction"/>
-        <constructor-arg name="title" value="SISS ANU Geonetwork"/>
-        <constructor-arg name="serviceUrl" value="http://siss1.anu.edu.au/geonetwork/srv/en/csw"/>
-        <constructor-arg name="recordInformationUrl" value="http://siss1.anu.edu.au/geonetwork/srv/en/main.home?uuid=%1$s"/>
-    </bean>
-    <bean id="cswGAPetroleumTest" class="org.auscope.portal.core.services.csw.CSWServiceItem">
-        <constructor-arg name="id" value="cswGAPetroleumTest"/>
+    <bean id="cswBomTest" class="org.auscope.portal.core.services.csw.CSWServiceItem">
+        <constructor-arg name="id" value="cswGBomTest"/>
         <constructor-arg name="title" value="GA Petroleum Geonetwork"/>
-        <constructor-arg name="serviceUrl" value="http://auscope-portal-dev.arrc.csiro.au/geonetwork/srv/en/csw"/>
-        <constructor-arg name="recordInformationUrl" value="http://auscope-portal-dev.arrc.csiro.au/geonetwork/srv/en/main.home?uuid=%1$s"/>
+        <constructor-arg name="serviceUrl" value="http://auscope-services-test.arrc.csiro.au/bomgeonetwork/srv/en/csw"/>
+        <constructor-arg name="recordInformationUrl" value="http://auscope-services-test.arrc.csiro.au/bomgeonetwork/srv/en/main.home?uuid=%1$s"/>
     </bean>
+
+
 </beans>

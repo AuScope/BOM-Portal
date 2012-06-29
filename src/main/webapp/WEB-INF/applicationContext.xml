@@ -96,4 +96,11 @@
         </constructor-arg>
     </bean>
 
+    <bean id="sosService" class="org.auscope.portal.core.services.SOSService">
+        <constructor-arg name="httpServiceCaller" ref="httpServiceCaller"/>
+        <constructor-arg name="sosMethodMaker">
+            <bean class="org.auscope.portal.core.services.methodmakers.SOSMethodMaker">
+            </bean>
+        </constructor-arg>
+    </bean>
 </beans>

@@ -1,5 +1,6 @@
 package org.auscope.portal.server.web.controllers;
 
+import org.apache.commons.httpclient.HttpMethodBase;
 import org.auscope.portal.core.server.PortalPropertyPlaceholderConfigurer;
 import org.auscope.portal.core.services.PortalServiceException;
 import org.auscope.portal.core.services.SISSVocService;
@@ -78,7 +79,7 @@ public class TestVocabController extends PortalTestClass {
 
         context.checking(new Expectations() {{
             oneOf(propertyConfigurer).resolvePlaceholder("HOST.vocabService.url");will(returnValue(url));
-            oneOf(mockService).getConceptByLabel(url, repository, label);will(throwException(new PortalServiceException(null)));
+            oneOf(mockService).getConceptByLabel(url, repository, label);will(throwException(new PortalServiceException((HttpMethodBase)null)));
         }});
 
         ModelAndView mav = vocabController.getScalarQuery(repository, label);
