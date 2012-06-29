@@ -41,6 +41,9 @@ Ext.define('bom.layer.filterer.BomFormFactory', {
             case 'wml-extreme':
                 baseFilterForm = Ext.create('bom.layer.filterer.forms.BomExtremeFilterForm', baseFilterFormCfg);
                 return this._generateResult(baseFilterForm, true);
+            case 'wml-high_quality_data_network_view':
+                baseFilterForm = Ext.create('bom.layer.filterer.forms.BomHighQualityDataFilterForm', baseFilterFormCfg);
+                return this._generateResult(baseFilterForm, true);
             case 'reports-anzcw':
                 baseFilterForm = Ext.create('bom.layer.filterer.forms.ReportFilterForm', baseFilterFormCfg);
                 return this._generateResult(baseFilterForm, true);

@@ -5,7 +5,8 @@ Ext.define('bom.layer.filterer.forms.BomHighQualityDataFilterForm', {
     extend: 'bom.layer.filterer.forms.BomFilterForm',
 
     constructor : function(config) {
-        var now = new Date();
+        var startDate = new Date(2009, 0, 0);
+        var endDate = new Date();
 
         var dataTypeStore = Ext.create('Ext.data.Store', {
             fields : ['type', 'value'],
@@ -31,8 +32,8 @@ Ext.define('bom.layer.filterer.forms.BomHighQualityDataFilterForm', {
                     {type : 'Daily', value : 'day|7'}]
         });
 
-        var dataCombo = this._buildHQComboCfg('Data', dataTypeStore, 'dataType', 'Select', 160, 'data', dataTypes[0]);
-        var periodCombo = this._buildHQComboCfg('Period', periodTypeStore, 'periodType', 'Select', 160, 'period', periodTypes[0]);
+        var dataCombo = this._buildHQComboCfg('Data', dataTypeStore, 'dataType', 'Select', 160, 'data');
+        var periodCombo = this._buildHQComboCfg('Period', periodTypeStore, 'periodType', 'Select', 160, 'period');
 
         Ext.apply(config, {
             border      : false,
@@ -70,10 +71,10 @@ Ext.define('bom.layer.filterer.forms.BomHighQualityDataFilterForm', {
         this.callParent(arguments);
     },
 
-    _buildHQComboCfg : function(label, store, id, emptyText, width, hiddenName, defaultValues) {
+    _buildHQComboCfg : function(label, store, id, emptyText, width, name) {
         return {
             xtype          : 'combo',
-            hiddenName     : hiddenName,
+            name           : name,
             allowBlank     : false,
             width          : width,
             editable       : false,
@@ -85,8 +86,6 @@ Ext.define('bom.layer.filterer.forms.BomHighQualityDataFilterForm', {
             typeAhead      : false,
             displayField   : 'type',
             valueField     : 'value',
-            value          : defaultValues[0],
-            hiddenValue    : defaultValues[1],
             autoSelect     : true,
             itemId         : id
         };

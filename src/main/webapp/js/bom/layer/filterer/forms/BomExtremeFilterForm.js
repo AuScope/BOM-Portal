@@ -7,7 +7,8 @@ Ext.define('bom.layer.filterer.forms.BomExtremeFilterForm', {
     extend: 'bom.layer.filterer.forms.BomFilterForm',
 
     constructor : function(config) {
-        var now = new Date();
+        var startDate = new Date(2009, 0, 0);
+        var endDate = new Date();
 
         var logOpCombo = this._buildComboCfg('Logical Operator', bom.layer.filterer.forms.BomFilterForm.logOpTypeStore, 'xOpLogic', ' AND ', 50);
         var opStation = this._buildComboCfg('', bom.layer.filterer.forms.BomFilterForm.compOpTypeStore, 'xOpStation', '=', 35);
@@ -27,7 +28,7 @@ Ext.define('bom.layer.filterer.forms.BomExtremeFilterForm', {
             fieldLabel : 'CQL',
             name       : 'cql_filter',
             itemId     : 'xCql',
-            value      : "wml:date>='" + Ext.util.Format.date(now, "Y-m-d") + "' AND wml:date<='" + Ext.util.Format.date(now, "Y-m-d" + "'"),
+            value      : "",
             width      : 260
         };
 

@@ -6,7 +6,8 @@ Ext.define('bom.layer.filterer.forms.BomMonthlySummaryFilterForm', {
     extend: 'bom.layer.filterer.forms.BomFilterForm',
 
     constructor : function(config) {
-        var now = new Date();
+        var startDate = new Date(2009, 0, 0);
+        var endDate = new Date();
 
         var tempTypeStore = Ext.create('Ext.data.Store', {
             fields : ['type', 'value'],
@@ -33,7 +34,7 @@ Ext.define('bom.layer.filterer.forms.BomMonthlySummaryFilterForm', {
             fieldLabel : 'CQL',
             name       : 'cql_filter',
             itemId     : 'monCql',
-            value      : "wml:date>='" + Ext.util.Format.date(now, "Y-m-d") + "' AND wml:date<='" + Ext.util.Format.date(now, "Y-m-d" + "'"),
+            value      : "wml:date>='" + Ext.util.Format.date(startDate, "Y-m-d") + "' AND wml:date<='" + Ext.util.Format.date(endDate, "Y-m-d" + "'"),
             width      : 260
         };
 
@@ -212,8 +213,8 @@ Ext.define('bom.layer.filterer.forms.BomMonthlySummaryFilterForm', {
                           fieldLabel : 'Start Date',
                           name       : 'wml:date',
                           format     : "Y-m-d",
-                          value      : Ext.util.Format.date(now, "Y-m-d"),
-                          blankText  : Ext.util.Format.date(now, "Y-m-d"),
+                          value      : Ext.util.Format.date(startDate, "Y-m-d"),
+                          blankText  : Ext.util.Format.date(startDate, "Y-m-d"),
                           editable   : false,
                           id         : 'monStartDate',
                           submitValue: false
@@ -227,7 +228,7 @@ Ext.define('bom.layer.filterer.forms.BomMonthlySummaryFilterForm', {
                           fieldLabel : 'End Date',
                           name       : 'wml:date',
                           format     : "Y-m-d",
-                          value      : Ext.util.Format.date(now, "Y-m-d"),
+                          value      : Ext.util.Format.date(endDate, "Y-m-d"),
                           editable   : false,
                           id         : 'monEndDate',
                           submitValue: false

@@ -165,15 +165,6 @@ Ext.application({
             }
         });
 
-        var unmappedRecordsPanel = Ext.create('portal.widgets.panel.CSWRecordPanel', {
-            title : 'Registered Layers',
-            store : unmappedCSWRecordStore,
-            map : map,
-            listeners : {
-                addlayerrequest : handleAddRecordToMap
-            }
-        });
-
         var customRecordsPanel = Ext.create('portal.widgets.panel.CustomRecordPanel', {
             title : 'Custom Layers',
             store : customRecordStore,
@@ -191,7 +182,6 @@ Ext.application({
             height : 265,
             enableTabScroll : true,
             items:[knownLayersPanel,
-                unmappedRecordsPanel,
                 customRecordsPanel
             ]
         });
