@@ -41,6 +41,8 @@ public class MenuController extends BasePortalController {
          = hostConfigurer.resolvePlaceholder("HOST.vocabService.url");
       String maxFeatureValue
            = hostConfigurer.resolvePlaceholder("HOST.maxFeatures.value");
+      String climateReportsUrl
+          = hostConfigurer.resolvePlaceholder("HOST.climatereport.url");
 
       logger.debug("googleKey: " + googleKey);
       logger.debug("vocabServiceUrl: " + vocabServiceUrl);
@@ -50,6 +52,7 @@ public class MenuController extends BasePortalController {
       mav.addObject("googleKey", googleKey);
       mav.addObject("vocabServiceUrl", vocabServiceUrl);
       mav.addObject("maxFeatureValue", maxFeatureValue);
+      mav.addObject("climateReportsUrl", climateReportsUrl);
       return mav;
    }
 

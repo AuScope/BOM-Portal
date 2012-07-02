@@ -41,6 +41,7 @@
     </bean>
 
     <bean id="wfsToKmlTransformer" class="org.auscope.portal.core.xslt.WfsToKmlTransformer">
+        <constructor-arg name="resource" value="/bom-kml.xsl"/>
     </bean>
 
     <bean id="cswCacheService" class="org.auscope.portal.core.services.CSWCacheService">

@@ -14,6 +14,14 @@ Ext.define('bom.layer.BomQuerierFactory', {
     _generateQuerier : function(knownLayer, wfsResources, wmsResources, wcsResources) {
         var cfg = {map : this.map};
 
+        //High Quality data features don't allow gml:Id lookups </rant>
+        //To workaround this we have a custom feature source that looks up via the gps site id.
+        if (knownLayer && knownLayer.get('id') === 'wml-high_quality_data_network_view') {
+            cfg.featureSource = Ext.create('portal.layer.querier.wfs.featuresources.WFSFeatureByPropertySource', {
+                property : 'station'
+            });
+        }
+
         if (wfsResources.length > 0) {
             cfg.parser = Ext.create('bom.layer.querier.wfs.BomParser', {});
             cfg.knownLayerParser = Ext.create('bom.layer.querier.wfs.BomKnownLayerParser', {});

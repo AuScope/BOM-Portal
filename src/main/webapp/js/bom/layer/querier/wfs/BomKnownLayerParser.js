@@ -21,7 +21,7 @@ Ext.define('bom.layer.querier.wfs.BomKnownLayerParser', {
     constructor : function(config) {
         Ext.apply(config, {
             factoryNames : [
-
+                'bom.layer.querier.wfs.knownlayerfactories.HighQualityDataFactory'
             ]
         });
         this.callParent(arguments);

@@ -17,6 +17,7 @@ Ext.define('bom.layer.querier.wfs.BomParser', {
     constructor : function(config) {
         Ext.apply(config, {
             factoryNames : [
+                'bom.layer.querier.wfs.factories.HighQualityDataFactory',
                 'portal.layer.querier.wfs.factories.SimpleFactory' //The simple factory should always go last
             ]
         });

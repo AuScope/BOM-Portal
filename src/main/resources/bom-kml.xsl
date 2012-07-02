@@ -9,6 +9,7 @@
     xmlns:sa="http://www.opengis.net/sampling/1.0"
     xmlns:wfs="http://www.opengis.net/wfs"
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+    xmlns:wml="http://bom.gov.au"
     xmlns:xlink="http://www.w3.org/1999/xlink"
     exclude-result-prefixes="er geodesy gml gsml ngcp sa wfs xsl xlink">
 
@@ -81,15 +82,15 @@
       </kml>
    </xsl:template>
 
-    <!-- Geodesy SF doesn't use the gmlId to identify its features -->
-    <xsl:template match="gml:featureMembers/ngcp:GnssStation | gml:featureMember/ngcp:GnssStation" priority="10">
+    <!-- BOM SF doesn't use the gmlId to identify its features -->
+    <xsl:template match="gml:featureMembers/wml:high_quality_data_network_view | gml:featureMember/wml:high_quality_data_network_view" priority="10">
         <Placemark>
             <name>
-                <xsl:value-of select="ngcp:GPSSITEID"/>
+                <xsl:value-of select="wml:station"/>
             </name>
 
             <description>
-               <xsl:text>GENERIC_PARSER:</xsl:text><xsl:value-of select="ngcp:GPSSITEID"/>
+               <xsl:text>GENERIC_PARSER:</xsl:text><xsl:value-of select="wml:station"/>
             </description>
 
             <MultiGeometry>

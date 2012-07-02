@@ -24,6 +24,7 @@
          var VOCAB_SERVICE_URL = "${vocabServiceUrl}";
          var NVCL_WEB_SERVICE_IP = "${nvclWebServiceIP}";
          var MAX_FEATURES = "${maxFeatureValue}";
+         var CLIMATE_REPORTS_URL = "${climateReportsUrl}";
          var WEB_CONTEXT = '<%= request.getContextPath() %>';
 
       </script>
