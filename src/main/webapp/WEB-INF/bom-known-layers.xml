@@ -194,4 +194,40 @@
             </bean>
         </property>
     </bean>
+
+    <bean id="knownTypeGfLink" class="org.auscope.portal.core.view.knownlayer.KnownLayer">
+        <constructor-arg name="id" value="ahgf-link"/>
+        <constructor-arg name="knownLayerSelector">
+            <bean class="org.auscope.portal.core.view.knownlayer.WMSSelector">
+                <constructor-arg name="layerName" value="ahgf_cn:AHGFLink"/>
+            </bean>
+        </constructor-arg>
+        <property name="name" value="Link"/>
+        <property name="description" value=""/>
+        <property name="group" value="Geofabric"/>
+    </bean>
+
+    <bean id="knownTypeGfNode" class="org.auscope.portal.core.view.knownlayer.KnownLayer">
+        <constructor-arg name="id" value="ahgf-node"/>
+        <constructor-arg name="knownLayerSelector">
+            <bean class="org.auscope.portal.core.view.knownlayer.WMSSelector">
+                <constructor-arg name="layerName" value="ahgf_cn:AHGFNode"/>
+            </bean>
+        </constructor-arg>
+        <property name="name" value="Node"/>
+        <property name="description" value=""/>
+        <property name="group" value="Geofabric"/>
+    </bean>
+
+    <bean id="knownTypeGfCc" class="org.auscope.portal.core.view.knownlayer.KnownLayer">
+        <constructor-arg name="id" value="ahgf-cc"/>
+        <constructor-arg name="knownLayerSelector">
+            <bean class="org.auscope.portal.core.view.knownlayer.WMSSelector">
+                <constructor-arg name="layerName" value="ahgf_cn:AHGFContractedCatchment"/>
+            </bean>
+        </constructor-arg>
+        <property name="name" value="Contracted Catchment"/>
+        <property name="description" value=""/>
+        <property name="group" value="Geofabric"/>
+    </bean>
 </beans>
