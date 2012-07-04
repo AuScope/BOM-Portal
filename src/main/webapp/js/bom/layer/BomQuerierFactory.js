@@ -20,6 +20,12 @@ Ext.define('bom.layer.BomQuerierFactory', {
             cfg.featureSource = Ext.create('portal.layer.querier.wfs.featuresources.WFSFeatureByPropertySource', {
                 property : 'station'
             });
+        } else if (knownLayer && knownLayer.get('id') === 'slake-SurfaceReservoir') {
+            cfg.featureSource = Ext.create('bom.layer.querier.wfs.featuresources.WFS20FeatureSource', {
+                extraParams : {
+                    outputFormat : 'gml32'
+                }
+            });
         }
 
         if (wfsResources.length > 0) {

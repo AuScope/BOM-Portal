@@ -21,6 +21,7 @@ Ext.define('bom.layer.querier.wfs.BomParser', {
                 'bom.layer.querier.wfs.factories.HighQualityDataFactory',
                 'bom.layer.querier.wfs.factories.DailyClimateSummaryFactory',
                 'bom.layer.querier.wfs.factories.MonthlyClimateSummaryFactory',
+                'bom.layer.querier.wfs.factories.SlakeReservoirFactory',
                 'portal.layer.querier.wfs.factories.SimpleFactory' //The simple factory should always go last
             ]
         });

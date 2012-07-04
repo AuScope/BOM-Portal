@@ -100,14 +100,15 @@ public class TestWFSController extends PortalTestClass {
         final String wfsUrl = "http://service/wfs";
         final String featureType = "type:name";
         final String featureId = "feature-id";
+        final String outputFormat = "of";
 
         context.checking(new Expectations() {{
-            oneOf(mockWfsService).getWfsResponseAsKml(wfsUrl, featureType, featureId);will(returnValue(new WFSTransformedResponse(gmlBlob, kmlBlob, mockMethod)));
+            oneOf(mockWfsService).getWfsResponseAsKml(wfsUrl, featureType, featureId, outputFormat);will(returnValue(new WFSTransformedResponse(gmlBlob, kmlBlob, mockMethod)));
 
             allowing(mockMethod).getURI();will(returnValue(new URI("http://service.wfs/wfs", false)));
         }});
 
-        ModelAndView modelAndView = wfsController.requestFeature(wfsUrl, featureType, featureId);
+        ModelAndView modelAndView = wfsController.requestFeature(wfsUrl, featureType, featureId, outputFormat);
         ModelMap dataObj = (ModelMap) modelAndView.getModel().get("data");
         Assert.assertTrue((Boolean) modelAndView.getModel().get("success"));
         Assert.assertNotNull(dataObj);

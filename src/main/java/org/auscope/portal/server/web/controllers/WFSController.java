@@ -85,17 +85,22 @@ public class WFSController extends BasePortalController {
     @RequestMapping("/requestFeature.do")
     public ModelAndView requestFeature(@RequestParam("serviceUrl") final String serviceUrl,
                                        @RequestParam("typeName") final String featureType,
-                                       @RequestParam("featureId") final String featureId) throws Exception {
+                                       @RequestParam("featureId") final String featureId,
+                                       @RequestParam(required=false, value="outputFormat") final String outputFormat) throws Exception {
         WFSTransformedResponse response = null;
         try {
-            response = wfsService.getWfsResponseAsKml(serviceUrl, featureType, featureId);
+            response = wfsService.getWfsResponseAsKml(serviceUrl, featureType, featureId, outputFormat);
         } catch (Exception ex) {
             log.warn(String.format("Exception getting '%2$s' with id '%4$s' from '%1$s': %3$s", serviceUrl, featureType, ex, featureId));
             log.debug("Exception: ", ex);
             return generateExceptionResponse(ex, serviceUrl);
         }
 
-        return generateJSONResponseMAV(true, response.getGml(), response.getTransformed(), response.getMethod());
+        String transformed = response.getTransformed();
+        if (transformed == null || transformed.isEmpty()) {
+            transformed = "<kml/>";
+        }
+        return generateJSONResponseMAV(true, response.getGml(), transformed, response.getMethod());
     }
 
     /**

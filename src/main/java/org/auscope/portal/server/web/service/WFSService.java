@@ -71,6 +71,21 @@ public class WFSService extends BaseWFSService {
      * The response is returned as a String in both GML and KML forms.
      * @param wfsUrl the web feature service url
      * @param featureType the type name
+     * @param featureId A unique ID of a single feature type to query
+     * @return
+     * @throws Exception
+     */
+    public WFSTransformedResponse getWfsResponseAsKml(String wfsUrl, String featureType, String featureId, String outputFormat) throws PortalServiceException {
+        HttpMethodBase method = generateWFSRequest(wfsUrl, featureType, featureId, null, null, null, null, outputFormat);
+        return doRequestAndKmlTransform(method, wfsUrl);
+    }
+
+    /**
+     * Makes a WFS GetFeature request constrained by the specified parameters
+     *
+     * The response is returned as a String in both GML and KML forms.
+     * @param wfsUrl the web feature service url
+     * @param featureType the type name
      * @param filterString A OGC filter string to constrain the request
      * @param maxFeatures  A maximum number of features to request
      * @param srs [Optional] The spatial reference system the response should be encoded to @param srsName - will use BaseWFSService.DEFAULT_SRS if unspecified

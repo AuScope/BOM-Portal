@@ -38,6 +38,9 @@
     </bean>
 
     <bean id="wfsMethodMaker" class="org.auscope.portal.core.services.methodmakers.WFSGetFeatureMethodMaker">
+        <property name="namespaces">
+            <bean class="org.auscope.portal.server.domain.wfs.SlakeNamespace"/>
+        </property>
     </bean>
 
     <bean id="wfsToKmlTransformer" class="org.auscope.portal.core.xslt.WfsToKmlTransformer">
@@ -102,6 +105,14 @@
         <constructor-arg name="sosMethodMaker">
             <bean class="org.auscope.portal.core.services.methodmakers.SOSMethodMaker">
             </bean>
+        </constructor-arg>
+    </bean>
+
+    <bean id="slakeService" class="org.auscope.portal.server.web.service.SlakeService">
+        <constructor-arg name="httpServiceCaller" ref="httpServiceCaller"/>
+        <constructor-arg name="wfsMethodMaker" ref="wfsMethodMaker"/>
+        <constructor-arg name="transformer">
+            <bean class="org.auscope.portal.server.domain.wfs.SlakeKmlTransformer"></bean>
         </constructor-arg>
     </bean>
 </beans>
